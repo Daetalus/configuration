@@ -154,21 +154,53 @@ source $VIMRUNTIME/menu.vim
 
 set encoding=utf-8
 " 在图形界面和终端的配色方案、字体
-set columns=120 lines=40    "设置gui默认界面大小
-if has("unix")
-    set guifont=Droid\ Sans\ Mono\ 10
-    set guifontwide=思源黑体\ CN\ 10
-elseif has("win32")
-    set guifont=Consolas:h10
-    set guifontwide=Kaiti:h10  " guifontwide只有在encoding=utf-8时才生效
+if has("gui_running")
+    " 窗体设置
+    set guioptions-=T " 隐藏工具栏 
+    " 在图形界面和终端的配色方案、字体
+    set columns=120 lines=40    "设置gui默认界面大小
+    if has("unix")
+        set guifont=Droid\ Sans\ Mono\ 10
+        set guifontwide=思源黑体\ CN\ 10
+    elseif has("win32")
+        " vsplit window, such as NERDTree will change window postion
+        " see http://vim.1045645.n5.nabble.com/Vertical-split-changing-GVim-application-window-position-td5709140.html
+        set guioptions+=l
+        set guioptions-=L
+        set guioptions+=r
+        set guifont=Consolas:h10
+        "set guifontwide=Kaiti:h10
+        set guifontwide=Microsoft\ YaHei\ Mono:h10 " guifontwide只有在encoding=utf-8时才生效
+    endif
 endif
-
 " "缓冲区写入文件的时候自动检查文件类型
 " au BufWritePost * filet detect
+
+" TODO Windows下有效，Linux下待测
+" 输入法设置
+if has('multi_byte_ime')
+	"未开启IME时光标背景色
+	hi Cursor guifg=bg guibg=Orange gui=NONE
+	"开启IME时光标背景色
+	hi CursorIM guifg=NONE guibg=Skyblue gui=NONE
+	" 关闭Vim的自动切换IME输入法(插入模式和检索模式)
+	set iminsert=0 imsearch=0
+	" 插入模式输入法状态未被记录时，默认关闭IME
+	inoremap <silent> <ESC> <ESC>:set iminsert=2<CR>
+endif
+
+" NerdTree配置
+nmap <F3> :NERDTree <CR>
+nmap <F4> :NERDTreeClose <CR>
 
 "Switch Input Method in Gvim
 autocmd! InsertLeave *  set imdisable
 autocmd! InsertEnter *  set noimdisable
+
+" 默认路径修改
+if has("win32") || has ("win64")
+    cd d:\workspace
+endif
 
 " Go lang setting
 "let g:go_fmt_command = "goimports"
@@ -200,5 +232,4 @@ if has("unix")
     autocmd VimResized * call FontChangeOnResize()
 endif
 
-" 窗体设置
-set guioptions-=T " 隐藏工具栏 
+
