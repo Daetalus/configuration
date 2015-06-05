@@ -23,7 +23,8 @@ if has('unix')
 endif
 
 " Indent line
-Bundle 'Yggdroot/indentLine'
+" Bundle 'Yggdroot/indentLine'
+Bundle 'nathanaelkane/vim-indent-guides'
 
 " NERDTRee
 Bundle 'scrooloose/nerdtree'
@@ -45,6 +46,7 @@ Bundle 'tomtom/tcomment_vim'
 Plugin 'fatih/vim-go'
 "修改Vim启动界面
 Bundle 'mhinz/vim-startify'
+
 Bundle 'bling/vim-airline'
 " Track the engine.
 Plugin 'SirVer/ultisnips'
@@ -74,17 +76,20 @@ if !has("gui_running")
     set t_Co=256
 endif
 
+" indent line 设置
+let g:indent_guides_guide_size = 1
+let g:indent_guides_enable_on_vim_startup = 1
 
 if !exists("syntax_on")
     syntax on
 endif
 
-set clipboard=unnamed
-"设置tab字符个数
-
 set hlsearch
 "vim和系统共用剪切板
 let g:copycat#auto_sync = 1
+set clipboard=unnamed
+
+"设置tab字符个数
 set tabstop=4
 set shiftwidth=4
 set expandtab
