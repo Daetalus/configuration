@@ -23,14 +23,13 @@ if has('unix')
 endif
 
 " Indent line
-" Bundle 'Yggdroot/indentLine'
-Bundle 'nathanaelkane/vim-indent-guides'
+Bundle 'Yggdroot/indentLine'
+" Bundle 'nathanaelkane/vim-indent-guides'
 
 " NERDTRee
 Bundle 'scrooloose/nerdtree'
 Bundle 'jistr/vim-nerdtree-tabs'
 
-Bundle 'uguu-org/vim-matrix-screensaver'
 Bundle 'tpope/vim-surround'
 Bundle 'tomasr/molokai'
 
@@ -77,9 +76,14 @@ if !has("gui_running")
 endif
 
 " indent line 设置
-let g:indent_guides_guide_size = 1
-let g:indent_guides_enable_on_vim_startup = 1
-
+let g:indentLine_color_gui = '#9370DB'
+" let g:indent_guides_guide_size = 1
+" let g:indent_guides_enable_on_vim_startup = 1
+"
+" Pymode配置
+let g:pymode_lint = 1
+let g:pymode_lint_on_write = 1
+let g:pymode_lint_checkers=['pyflakes', 'pep8', 'mccabe']
 if !exists("syntax_on")
     syntax on
 endif
@@ -114,11 +118,10 @@ let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
 
 "对相应的文件进行特殊设置
 if has("autocmd")
-    filetyp plugin indent on
-
     " for Python
-    autocmd FileType python setlocal et | setlocal sta | setlocal sw=4
-    autocmd FileType python compiler pyunit
+    au BufWriteCmd *.py write || :PymodeLint
+    " autocmd FileType python setlocal et | setlocal sta | setlocal sw=4
+    " autocmd FileType python compiler pyunit
 
     " for Go lang
     autocmd BufRead *.go set syn=go
@@ -160,8 +163,8 @@ elseif has("win32")
     set guifontwide=Kaiti:h10  " guifontwide只有在encoding=utf-8时才生效
 endif
 
-"缓冲区写入文件的时候自动检查文件类型
-au BufWritePost * filet detect
+" "缓冲区写入文件的时候自动检查文件类型
+" au BufWritePost * filet detect
 
 "Switch Input Method in Gvim
 autocmd! InsertLeave *  set imdisable
