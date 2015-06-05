@@ -82,6 +82,9 @@ endif
 set clipboard=unnamed
 "设置tab字符个数
 
+set hlsearch
+"vim和系统共用剪切板
+let g:copycat#auto_sync = 1
 set tabstop=4
 set shiftwidth=4
 set expandtab
