@@ -61,7 +61,7 @@ let g:UltiSnipsJumpBackwardTrigger="<c-tab>"
 ""定义存放代码片段的文件夹 .vim/snippets下，使用自定义和默认的，将会的到全局，有冲突的会提示
 let g:UltiSnipsSnippetDirectories=["UltiSnips", "bundle/vim-snippets/UltiSnips"]
 """"""""""""""""""""""""""""""
-" airline setting
+" airline 设置
 """"""""""""""""""""""""""""""
 set laststatus=2
 let g:airline_detect_whitespace          = 1 "空白符检测
@@ -77,22 +77,25 @@ endif
 
 " indent line 设置
 let g:indentLine_color_gui = '#9370DB'
-" let g:indent_guides_guide_size = 1
-" let g:indent_guides_enable_on_vim_startup = 1
-"
+
 " Pymode配置
 let g:pymode_lint = 1
 let g:pymode_lint_on_write = 1
 let g:pymode_lint_checkers=['pyflakes', 'pep8', 'mccabe']
+
 if !exists("syntax_on")
     syntax on
 endif
 
-set hlsearch
 "vim和系统共用剪切板
-let g:copycat#auto_sync = 1
-set clipboard=unnamed
+if has('win32') || has('win64')
+    let g:copycat#auto_sync = 1
+elseif has('unix')
+    set clipboard=unnamed
+endif
 
+" 一些基本设置
+set hlsearch
 "设置tab字符个数
 set tabstop=4
 set shiftwidth=4
@@ -108,8 +111,6 @@ set ruler
 set nobackup
 "自动将当前文件所在的目录设为工作目录
 set autochdir
-"映射F8为显示列表,需要taglist插件
-nnoremap <silent> <F8> :Tlist<CR>
 
 " YCM配置
 let g:ycm_confirm_extra_conf = 0
@@ -120,8 +121,6 @@ let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
 if has("autocmd")
     " for Python
     au BufWriteCmd *.py write || :PymodeLint
-    " autocmd FileType python setlocal et | setlocal sta | setlocal sw=4
-    " autocmd FileType python compiler pyunit
 
     " for Go lang
     autocmd BufRead *.go set syn=go
@@ -152,11 +151,10 @@ language messages zh_CN.utf-8
 source $VIMRUNTIME/delmenu.vim
 source $VIMRUNTIME/menu.vim
 
-set encoding=utf-8
 " 在图形界面和终端的配色方案、字体
 if has("gui_running")
     " 窗体设置
-    set guioptions-=T " 隐藏工具栏 
+    set guioptions-=T " 隐藏工具栏
     " 在图形界面和终端的配色方案、字体
     set columns=120 lines=40    "设置gui默认界面大小
     if has("unix")
@@ -169,33 +167,26 @@ if has("gui_running")
         set guioptions-=L
         set guioptions+=r
         set guifont=Consolas:h10
-        "set guifontwide=Kaiti:h10
         set guifontwide=Microsoft\ YaHei\ Mono:h10 " guifontwide只有在encoding=utf-8时才生效
     endif
 endif
-" "缓冲区写入文件的时候自动检查文件类型
-" au BufWritePost * filet detect
 
 " TODO Windows下有效，Linux下待测
 " 输入法设置
 if has('multi_byte_ime')
-	"未开启IME时光标背景色
-	hi Cursor guifg=bg guibg=Orange gui=NONE
-	"开启IME时光标背景色
-	hi CursorIM guifg=NONE guibg=Skyblue gui=NONE
-	" 关闭Vim的自动切换IME输入法(插入模式和检索模式)
-	set iminsert=0 imsearch=0
-	" 插入模式输入法状态未被记录时，默认关闭IME
-	inoremap <silent> <ESC> <ESC>:set iminsert=2<CR>
+    "未开启IME时光标背景色
+    hi Cursor guifg=bg guibg=Orange gui=NONE
+    "开启IME时光标背景色
+    hi CursorIM guifg=NONE guibg=Skyblue gui=NONE
+    " 关闭Vim的自动切换IME输入法(插入模式和检索模式)
+    set iminsert=0 imsearch=0
+    " 插入模式输入法状态未被记录时，默认关闭IME
+    inoremap <silent> <ESC> <ESC>:set iminsert=2<CR>
 endif
 
 " NerdTree配置
 nmap <F3> :NERDTree <CR>
 nmap <F4> :NERDTreeClose <CR>
-
-"Switch Input Method in Gvim
-autocmd! InsertLeave *  set imdisable
-autocmd! InsertEnter *  set noimdisable
 
 " 默认路径修改
 if has("win32") || has ("win64")
@@ -231,5 +222,3 @@ endfunction
 if has("unix")
     autocmd VimResized * call FontChangeOnResize()
 endif
-
-
