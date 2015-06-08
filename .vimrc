@@ -89,9 +89,9 @@ endif
 
 "vim和系统共用剪切板
 if has('win32') || has('win64')
-    let g:copycat#auto_sync = 1
-elseif has('unix')
     set clipboard=unnamed
+elseif has('unix')
+    let g:copycat#auto_sync = 1
 endif
 
 " 一些基本设置
@@ -111,6 +111,13 @@ set ruler
 set nobackup
 "自动将当前文件所在的目录设为工作目录
 set autochdir
+" 去掉输入错误的提示声音
+set novisualbell         " don't beep
+set noerrorbells         " don't beep
+set cursorline          " 突出显示当前行
+" 打开增量搜索模式,随着键入即时搜索
+set incsearch
+set softtabstop=4 " 按退格键时可以一次删掉 4 个空格
 
 " YCM配置
 let g:ycm_confirm_extra_conf = 0
@@ -187,6 +194,16 @@ endif
 " NerdTree配置
 nmap <F3> :NERDTree <CR>
 nmap <F4> :NERDTreeClose <CR>
+
+"Smart way to move between windows 分屏窗口移动
+map <C-j> <C-W>j
+map <C-k> <C-W>k
+map <C-h> <C-W>h
+map <C-l> <C-W>l
+
+"Reselect visual block after indent/outdent.调整缩进后自动选中，方便再次操作
+vnoremap < <gv
+vnoremap > >gv
 
 " 默认路径修改
 if has("win32") || has ("win64")
