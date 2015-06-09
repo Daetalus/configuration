@@ -13,9 +13,7 @@ endif
 Bundle 'gmarik/vundle'
 filetype plugin indent on
 
-"My Bundle here:
-"
-" original repos on github
+" 插件列表，位于GitHub上
 Bundle 'jiangmiao/auto-pairs'
 Bundle 'yianwillis/vimcdoc'
 if has('unix')
@@ -60,6 +58,7 @@ let g:UltiSnipsJumpBackwardTrigger="<c-tab>"
 "
 ""定义存放代码片段的文件夹 .vim/snippets下，使用自定义和默认的，将会的到全局，有冲突的会提示
 let g:UltiSnipsSnippetDirectories=["UltiSnips", "bundle/vim-snippets/UltiSnips"]
+
 """"""""""""""""""""""""""""""
 " airline 设置
 """"""""""""""""""""""""""""""
@@ -71,6 +70,7 @@ let g:airline_theme                      = "bubblegum" "设定主题
 "let g:molokai_original = 1"let g:rehash256=1
 
 colorscheme molokai
+
 if !has("gui_running")
     set t_Co=256
 endif
@@ -90,7 +90,7 @@ endif
 "vim和系统共用剪切板
 if has('win32') || has('win64')
     set clipboard=unnamed
-elseif has('unix')
+else
     let g:copycat#auto_sync = 1
 endif
 
@@ -217,6 +217,7 @@ let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
 
+" 功能函数配置
 function! FontChangeOnResize()
     if &columns > 100
         set guifont=Droid\ Sans\ Mono\ 14
@@ -239,3 +240,32 @@ endfunction
 if has("unix")
     autocmd VimResized * call FontChangeOnResize()
 endif
+
+" 保存文件时删除多余空格
+fun! <SID>StripTrailingWhitespaces()
+    let l = line(".")
+    let c = col(".")
+    %s/\s\+$//e
+    call cursor(l, c)
+endfun
+autocmd FileType c,cpp,java,go,php,javascript,puppet,python,rust,twig,xml,yml,perl autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
+
+
+" 定义函数AutoSetFileHead，自动插入文件头
+autocmd BufNewFile *.sh,*.py exec ":call AutoSetFileHead()"
+function! AutoSetFileHead()
+    "如果文件类型为.sh文件
+    if &filetype == 'sh'
+        call setline(1, "\#!/bin/bash")
+    endif
+
+    "如果文件类型为python
+    if &filetype == 'python'
+        call setline(1, "\#!/usr/bin/env python")
+        call append(1, "\# encoding: utf-8")
+    endif
+
+    normal G
+    normal o
+    normal o
+endfunc
