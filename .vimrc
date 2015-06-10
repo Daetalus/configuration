@@ -88,11 +88,8 @@ if !exists("syntax_on")
 endif
 
 "vim和系统共用剪切板
-if has('win32') || has('win64')
-    set clipboard=unnamed
-else
-    let g:copycat#auto_sync = 1
-endif
+set clipboard=unnamed
+" let g:copycat#auto_sync = 1
 
 " 一些基本设置
 set hlsearch
