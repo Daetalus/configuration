@@ -35,6 +35,13 @@ Bundle 'tomasr/molokai'
 Bundle 'klen/python-mode'
 " 显示行末的空格；
 Bundle 'vim-scripts/ShowTrailingWhitespace'
+" 更好的显示匹配的括号
+Bundle 'luochen1990/rainbow'
+"0 if you want to enable it later via :RainbowToggle
+let g:rainbow_active = 1
+" 平滑滚动
+Bundle 'yonchu/accelerated-smooth-scroll'
+
 Bundle 'kien/ctrlp.vim'
 Plugin 'godlygeek/tabular'
 Bundle 'tpope/vim-markdown'
