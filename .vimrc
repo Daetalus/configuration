@@ -97,8 +97,8 @@ endif
 "vim和系统共用剪切板
 set clipboard=unnamed
 " let g:copycat#auto_sync = 1
-
 " 一些基本设置
+
 set hlsearch
 "设置tab字符个数
 set tabstop=4
@@ -198,12 +198,18 @@ endif
 " NerdTree配置
 nmap <F3> :NERDTree <CR>
 nmap <F4> :NERDTreeClose <CR>
+let NERDTreeIgnore=['\.py[cd]$', '\~$', '\.swo$', '\.swp$', '^\.git$', '^\.hg$', '^\.svn$', '\.bzr$']
+let g:nerdtree_tabs_open_on_gui_startup=0
 
 "Smart way to move between windows 分屏窗口移动
 map <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
+
+" 优化水平滚动
+map zl zL
+map zh zH
 
 "Reselect visual block after indent/outdent.调整缩进后自动选中，方便再次操作
 vnoremap < <gv
