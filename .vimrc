@@ -40,7 +40,8 @@ Bundle 'luochen1990/rainbow'
 "0 if you want to enable it later via :RainbowToggle
 let g:rainbow_active = 1
 " 平滑滚动
-Bundle 'yonchu/accelerated-smooth-scroll'
+" 对于tmux来说，太慢了。。。忍痛割爱
+" Bundle 'yonchu/accelerated-smooth-scroll'
 
 Bundle 'kien/ctrlp.vim'
 Plugin 'godlygeek/tabular'
@@ -62,8 +63,8 @@ let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsListSnippets="<c-l>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<c-tab>"
-"
-""定义存放代码片段的文件夹 .vim/snippets下，使用自定义和默认的，将会的到全局，有冲突的会提示
+
+" 定义存放代码片段的文件夹 .vim/snippets下，使用自定义和默认的，将会的到全局，有冲突的会提示
 let g:UltiSnipsSnippetDirectories=["UltiSnips", "bundle/vim-snippets/UltiSnips"]
 
 """"""""""""""""""""""""""""""
@@ -74,13 +75,12 @@ let g:airline_detect_whitespace          = 1 "空白符检测
 let g:airline#extensions#tabline#enabled = 1 "顶部tab栏显示
 let g:airline_theme                      = "bubblegum" "设定主题
 
-"let g:molokai_original = 1"let g:rehash256=1
+"let g:molokai_original = 1"
+let g:rehash256=1
 
 colorscheme molokai
 
-if !has("gui_running")
-    set t_Co=256
-endif
+set t_Co=256
 
 " indent line 设置
 let g:indentLine_color_gui = '#9370DB'
@@ -99,6 +99,10 @@ set clipboard=unnamed
 " let g:copycat#auto_sync = 1
 " 一些基本设置
 
+set ttyfast
+set lazyredraw
+set mouse=a
+
 set hlsearch
 "设置tab字符个数
 set tabstop=4
@@ -113,8 +117,7 @@ set backspace=2
 set nu
 set ruler
 set nobackup
-"自动将当前文件所在的目录设为工作目录
-set autochdir
+
 " 去掉输入错误的提示声音
 set novisualbell         " don't beep
 set noerrorbells         " don't beep
