@@ -56,6 +56,14 @@ Bundle 'bling/vim-airline'
 " Track the engine.
 Plugin 'SirVer/ultisnips'
 
+" 自动重新载入vimrc，只对同一个窗口有效
+" 若对不同的gvim，则不起作用
+if has("win32") || has("win64")
+    autocmd bufwritepost $VIM/_vimrc source $VIM/_vimrc
+elseif has("unix")
+    autocmd bufwritepost .vimrc source ~/.vimrc
+endif
+
 " Snippets are separated from the engine. Add this if you want them:
 Plugin 'honza/vim-snippets'
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
