@@ -1,7 +1,6 @@
 [global_config]
   enabled_plugins = APTURLHandler, LaunchpadBugURLHandler
   title_inactive_fg_color = "#e5c200"
-  tab_position = hidden
 [keybindings]
   switch_to_tab_4 = <Alt>4
   switch_to_tab_5 = <Alt>5
@@ -28,7 +27,6 @@
     cursor_color = "#62d047"
     foreground_color = "#ffffff"
     show_titlebar = False
-    cursor_shape = ibeam
     font = DejaVu Sans Mono 12
     background_color = "#121212"
     scrollback_infinite = True
