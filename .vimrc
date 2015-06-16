@@ -1,5 +1,9 @@
 set nocompatible
 
+" 修改leader键
+let mapleader = ','
+let g:mapleader = ','
+
 " 规定Vundle的路径和插件安装路径
 if has('win32') || has('win64')
     set rtp+=$VIM/vimfiles/bundle/vundle/
@@ -19,7 +23,7 @@ Bundle 'yianwillis/vimcdoc'
 if has('unix')
     Bundle 'Valloric/YouCompleteMe'
 endif
-
+"
 " Indent line
 Bundle 'Yggdroot/indentLine'
 " Bundle 'nathanaelkane/vim-indent-guides'
@@ -40,8 +44,9 @@ Bundle 'luochen1990/rainbow'
 "0 if you want to enable it later via :RainbowToggle
 let g:rainbow_active = 1
 " 平滑滚动
+" 用rxvt似乎可以，先试试
 " 对于tmux来说，太慢了。。。忍痛割爱
-" Bundle 'yonchu/accelerated-smooth-scroll'
+Bundle 'yonchu/accelerated-smooth-scroll'
 
 Bundle 'kien/ctrlp.vim'
 Plugin 'godlygeek/tabular'
@@ -58,18 +63,10 @@ Plugin 'SirVer/ultisnips'
 
 " Snippets are separated from the engine. Add this if you want them:
 Plugin 'honza/vim-snippets'
+" 快速去行尾空格 [, + <Space>]
+Bundle 'bronson/vim-trailing-whitespace'
 
-" 自动重新载入vimrc，只对同一个窗口有效
-" 若对不同的gvim，则不起作用
-if has("win32") || has("win64")
-    autocmd bufwritepost $VIM/_vimrc source $VIM/_vimrc
-elseif has("unix")
-    autocmd bufwritepost .vimrc source ~/.vimrc
-endif
-
-" 修改leader键
-let mapleader = ','
-let g:mapleader = ','
+map <leader><space> :FixWhitespace<cr>
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<tab>"
@@ -110,34 +107,116 @@ endif
 "vim和系统共用剪切板
 set clipboard=unnamed
 " let g:copycat#auto_sync = 1
-" 一些基本设置
 
+" =========================
+" 控制、显示相关的设置
+" =========================
+set scrolloff=3     " 光标移动到buffer的顶部和底部时保持3行距离
 set ttyfast
 set lazyredraw
+" 在终端中启用鼠标
 set mouse=a
-
+" 高亮搜索
 set hlsearch
+" 打开增量搜索模式,随着键入即时搜索
+set incsearch
+
 "设置tab字符个数
 set tabstop=4
 set shiftwidth=4
+" 将tab展开成空格
 set expandtab
+" 按退格键时可以一次删掉4个空格
+set softtabstop=4
+
 "自动缩进
 set autoindent
 "智能缩进
 set si
-"更方便的退格键
+" 更方便的退格键
 set backspace=2
+" 行号
 set nu
 set ruler
-set nobackup
 
 " 去掉输入错误的提示声音
 set novisualbell         " don't beep
 set noerrorbells         " don't beep
 set cursorline          " 突出显示当前行
-" 打开增量搜索模式,随着键入即时搜索
-set incsearch
-set softtabstop=4 " 按退格键时可以一次删掉 4 个空格
+set cursorcolumn        "突出显示当前列
+
+" ==========================
+" 文件编码相关
+" ==========================
+
+" 无备份文件
+set nobackup
+" 关闭交换文件
+set noswapfile
+" 当文件在外部改动时，自动读取
+set autoread
+" 使用unix的换行模式作为标准文件类型
+set ffs=unix,dos,mac
+
+" 合并中文时不在中间加空格
+set formatoptions+=B
+" 如遇Unicode值大于255的文本，不必等到空格再折行。
+set formatoptions+=m
+
+"设定文件编码类型，彻底解决中文编码问题
+set encoding=utf-8
+set termencoding=utf-8
+set fileencoding=utf-8
+set fileencodings=ucs-bom,utf-8,gbk,cp936,latin-1
+
+"vim提示信息乱码的解决
+language messages zh_CN.utf-8
+"vim的菜单乱码解决：
+source $VIMRUNTIME/delmenu.vim
+source $VIMRUNTIME/menu.vim
+
+" ===================================================
+"   Vim窗口和标签页操作优化
+" ==================================================
+
+" 更方便的在窗口之间跳转
+map <C-j> <C-W>j
+map <C-k> <C-W>k
+map <C-h> <C-W>h
+map <C-l> <C-W>l
+
+" 优化水平滚动
+map zl zL
+map zh zH
+
+" 更好的操作不同tab
+" http://vim.wikia.com/wiki/Alternative_tab_navigation
+" http://stackoverflow.com/questions/2005214/switching-to-a-particular-tab-in-vim
+map <leader>th :tabnext<cr>
+map <leader>tl :tabprev<cr>
+map <leader>te :tabedit<cr>
+map <leader>td :tabclose<cr>
+map <leader>tm :tabm<cr>
+
+" 新建tab  Ctrl+t
+nnoremap <C-t>     :tabnew<CR>
+inoremap <C-t>     <Esc>:tabnew<CR>
+
+" normal模式下切换到确切的tab
+noremap <leader>1 1gt
+noremap <leader>2 2gt
+noremap <leader>3 3gt
+noremap <leader>4 4gt
+noremap <leader>5 5gt
+noremap <leader>6 6gt
+noremap <leader>7 7gt
+noremap <leader>8 8gt
+noremap <leader>9 9gt
+noremap <leader>0 :tablast<cr>
+
+"Reselect visual block after indent/outdent.调整缩进后自动选中，方便再次操作
+vnoremap < <gv
+vnoremap > >gv
 
 " YCM配置
 let g:ycm_confirm_extra_conf = 0
@@ -166,17 +245,6 @@ if has("autocmd")
     endif
 endif
 
-"设定文件编码类型，彻底解决中文编码问题
-set encoding=utf-8
-set termencoding=utf-8
-set fileencoding=utf-8
-set fileencodings=ucs-bom,utf-8,gbk,cp936,latin-1
-
-"vim提示信息乱码的解决
-language messages zh_CN.utf-8
-"vim的菜单乱码解决：
-source $VIMRUNTIME/delmenu.vim
-source $VIMRUNTIME/menu.vim
 
 " 在图形界面和终端的配色方案、字体
 if has("gui_running")
@@ -217,48 +285,6 @@ nmap <F4> :NERDTreeClose <CR>
 let NERDTreeIgnore=['\.py[cd]$', '\~$', '\.swo$', '\.swp$', '^\.git$', '^\.hg$', '^\.svn$', '\.bzr$']
 let g:nerdtree_tabs_open_on_gui_startup=0
 
-"Smart way to move between windows 分屏窗口移动
-map <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
-
-" 优化水平滚动
-map zl zL
-map zh zH
-
-" 更好的操作不同tab
-" http://vim.wikia.com/wiki/Alternative_tab_navigation
-" http://stackoverflow.com/questions/2005214/switching-to-a-particular-tab-in-vim
-
-map <leader>tj :tabnext<cr>
-map <leader>tk :tabprev<cr>
-map <leader>tn :tabnext<cr>
-map <leader>tp :tabprev<cr>
-
-map <leader>te :tabedit<cr>
-map <leader>td :tabclose<cr>
-map <leader>tm :tabm<cr>
-
-" 新建tab  Ctrl+t
-nnoremap <C-t>     :tabnew<CR>
-inoremap <C-t>     <Esc>:tabnew<CR>
-
-" normal模式下切换到确切的tab
-noremap <leader>1 1gt
-noremap <leader>2 2gt
-noremap <leader>3 3gt
-noremap <leader>4 4gt
-noremap <leader>5 5gt
-noremap <leader>6 6gt
-noremap <leader>7 7gt
-noremap <leader>8 8gt
-noremap <leader>9 9gt
-noremap <leader>0 :tablast<cr>
-
-"Reselect visual block after indent/outdent.调整缩进后自动选中，方便再次操作
-vnoremap < <gv
-vnoremap > >gv
 
 " 默认路径修改
 if has("win32") || has ("win64")
