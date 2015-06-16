@@ -56,6 +56,9 @@ Bundle 'bling/vim-airline'
 " Track the engine.
 Plugin 'SirVer/ultisnips'
 
+" Snippets are separated from the engine. Add this if you want them:
+Plugin 'honza/vim-snippets'
+
 " 自动重新载入vimrc，只对同一个窗口有效
 " 若对不同的gvim，则不起作用
 if has("win32") || has("win64")
@@ -64,8 +67,10 @@ elseif has("unix")
     autocmd bufwritepost .vimrc source ~/.vimrc
 endif
 
-" Snippets are separated from the engine. Add this if you want them:
-Plugin 'honza/vim-snippets'
+" 修改leader键
+let mapleader = ','
+let g:mapleader = ','
+
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsListSnippets="<c-l>"
@@ -240,16 +245,16 @@ nnoremap <C-t>     :tabnew<CR>
 inoremap <C-t>     <Esc>:tabnew<CR>
 
 " normal模式下切换到确切的tab
-nnoremap <A-1> 1gt
-nnoremap <A-2> 2gt
-nnoremap <A-3> 3gt
-nnoremap <A-4> 4gt
-nnoremap <A-5> 5gt
-nnoremap <A-6> 6gt
-nnoremap <A-7> 7gt
-nnoremap <A-8> 8gt
-nnoremap <A-9> 9gt
-nnoremap <A-0> :tablast<cr>
+noremap <leader>1 1gt
+noremap <leader>2 2gt
+noremap <leader>3 3gt
+noremap <leader>4 4gt
+noremap <leader>5 5gt
+noremap <leader>6 6gt
+noremap <leader>7 7gt
+noremap <leader>8 8gt
+noremap <leader>9 9gt
+noremap <leader>0 :tablast<cr>
 
 "Reselect visual block after indent/outdent.调整缩进后自动选中，方便再次操作
 vnoremap < <gv
@@ -312,7 +317,10 @@ function! AutoSetFileHead()
     "如果文件类型为python
     if &filetype == 'python'
         call setline(1, "\#!/usr/bin/env python")
-        call append(1, "\# encoding: utf-8")
+        call setline(2, "\# -*- coding:utf-8 -*-")
+        call setline(3, "from __future__ import division")
+        call setline(4, "from __future__ import unicode_literals")
+        call setline(5, "from __future__ import print_function")
     endif
 
     normal G
