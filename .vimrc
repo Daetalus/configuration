@@ -14,57 +14,59 @@ elseif has('unix')
 endif
 
 " let Vundle manage Vundle
-Bundle 'gmarik/vundle'
+Plugin 'gmarik/vundle'
 filetype plugin indent on
 
 " 插件列表，位于GitHub上
-Bundle 'jiangmiao/auto-pairs'
-Bundle 'yianwillis/vimcdoc'
+Plugin 'jiangmiao/auto-pairs'
+Plugin 'yianwillis/vimcdoc'
 if has('unix')
-    Bundle 'Valloric/YouCompleteMe'
+    Plugin 'Valloric/YouCompleteMe'
 endif
 "
 " Indent line
-Bundle 'Yggdroot/indentLine'
-" Bundle 'nathanaelkane/vim-indent-guides'
+Plugin 'Yggdroot/indentLine'
+" Plugin 'nathanaelkane/vim-indent-guides'
 
 " NERDTRee
-Bundle 'scrooloose/nerdtree'
-Bundle 'jistr/vim-nerdtree-tabs'
+Plugin 'scrooloose/nerdtree'
+Plugin 'jistr/vim-nerdtree-tabs'
 
-Bundle 'tpope/vim-surround'
-Bundle 'tomasr/molokai'
+Plugin 'tpope/vim-surround'
+Plugin 'tomasr/molokai'
 
 " Python
-Bundle 'klen/python-mode'
+Plugin 'klen/python-mode'
 " 显示行末的空格；
-Bundle 'vim-scripts/ShowTrailingWhitespace'
+Plugin 'vim-scripts/ShowTrailingWhitespace'
 " 更好的显示匹配的括号
-Bundle 'luochen1990/rainbow'
+Plugin 'luochen1990/rainbow'
 "0 if you want to enable it later via :RainbowToggle
 let g:rainbow_active = 1
 " 平滑滚动
 " 用rxvt似乎可以，先试试
 " 对于tmux来说，太慢了。。。忍痛割爱
-" Bundle 'yonchu/accelerated-smooth-scroll'
+" Plugin 'yonchu/accelerated-smooth-scroll'
 
-Bundle 'kien/ctrlp.vim'
+Plugin 'kien/ctrlp.vim'
 Plugin 'godlygeek/tabular'
-Bundle 'tpope/vim-markdown'
+Plugin 'tpope/vim-markdown'
 
-Bundle 'tomtom/tcomment_vim'
+Plugin 'tomtom/tcomment_vim'
 Plugin 'fatih/vim-go'
 "修改Vim启动界面
-Bundle 'mhinz/vim-startify'
+Plugin 'mhinz/vim-startify'
 
-Bundle 'bling/vim-airline'
+Plugin 'bling/vim-airline'
 " Track the engine.
 Plugin 'SirVer/ultisnips'
 
 " Snippets are separated from the engine. Add this if you want them:
 Plugin 'honza/vim-snippets'
 " 快速去行尾空格 [, + <Space>]
-Bundle 'bronson/vim-trailing-whitespace'
+Plugin 'bronson/vim-trailing-whitespace'
+" 类似Sublime的多光标编辑
+Plugin 'terryma/vim-multiple-cursors'
 
 map <leader><space> :FixWhitespace<cr>
 
