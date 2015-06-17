@@ -46,7 +46,7 @@ let g:rainbow_active = 1
 " 平滑滚动
 " 用rxvt似乎可以，先试试
 " 对于tmux来说，太慢了。。。忍痛割爱
-Bundle 'yonchu/accelerated-smooth-scroll'
+" Bundle 'yonchu/accelerated-smooth-scroll'
 
 Bundle 'kien/ctrlp.vim'
 Plugin 'godlygeek/tabular'
@@ -98,6 +98,7 @@ let g:indentLine_color_gui = '#9370DB'
 " Pymode配置
 let g:pymode_lint = 1
 let g:pymode_lint_on_write = 1
+let g:pymode_folding = 0
 let g:pymode_lint_checkers=['pyflakes', 'pep8', 'mccabe']
 
 if !exists("syntax_on")
@@ -142,8 +143,8 @@ set ruler
 " 去掉输入错误的提示声音
 set novisualbell         " don't beep
 set noerrorbells         " don't beep
-set cursorline          " 突出显示当前行
-set cursorcolumn        "突出显示当前列
+" set cursorline          " 突出显示当前行
+" set cursorcolumn        "突出显示当前列
 
 " ==========================
 " 文件编码相关
@@ -219,6 +220,7 @@ vnoremap < <gv
 vnoremap > >gv
 
 " YCM配置
+" let g:loaded_youcompleteme = 1
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_key_list_select_completion = ['<c-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
@@ -227,6 +229,9 @@ let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
 if has("autocmd")
     " for Python
     au BufWriteCmd *.py write || :PymodeLint
+    autocmd FileType python setlocal foldmethod=indent
+    "默认展开所有代码
+    set foldlevel=99
 
     " for Go lang
     autocmd BufRead *.go set syn=go
