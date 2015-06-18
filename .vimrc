@@ -96,6 +96,7 @@ set t_Co=256
 
 " indent line 设置
 let g:indentLine_color_gui = '#9370DB'
+let g:indentLine_char = '┊'
 
 " Pymode配置
 let g:pymode_lint = 1
@@ -338,7 +339,7 @@ fun! <SID>StripTrailingWhitespaces()
 endfun
 autocmd FileType c,cpp,java,go,php,javascript,puppet,python,rust,twig,xml,yml,perl autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
 
-
+map <leader>a :call AutoSetFileHead()<cr>
 " 定义函数AutoSetFileHead，自动插入文件头
 autocmd BufNewFile *.sh,*.py exec ":call AutoSetFileHead()"
 function! AutoSetFileHead()
