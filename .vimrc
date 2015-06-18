@@ -17,32 +17,67 @@ endif
 Plugin 'gmarik/vundle'
 filetype plugin indent on
 
-" 插件列表，位于GitHub上
+" =====================================
+"         插件及其对应配置
+" =====================================
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'yianwillis/vimcdoc'
+
 if has('unix')
     Plugin 'Valloric/YouCompleteMe'
+    " YCM配置
+    " let g:loaded_youcompleteme = 1
+    let g:ycm_confirm_extra_conf = 0
+    let g:ycm_key_list_select_completion = ['<c-n>', '<Down>']
+    let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
 endif
-"
-" Indent line
+
+" =====================================
+"      Indent line，标注缩进线
+" =====================================
 Plugin 'Yggdroot/indentLine'
 " Plugin 'nathanaelkane/vim-indent-guides'
+" indent line 设置
+let g:indentLine_color_gui = '#9370DB'
+let g:indentLine_char = '┊'
 
-" NERDTRee
+" =====================================
+"             NERDTRee
+" =====================================
 Plugin 'scrooloose/nerdtree'
 Plugin 'jistr/vim-nerdtree-tabs'
+" NerdTree配置
+nmap <F3> :NERDTree <CR>
+nmap <F4> :NERDTreeClose <CR>
+let NERDTreeHighlightCursorline=1
+let NERDTreeIgnore=['\.py[cd]$', '\~$', '\.swo$', '\.swp$', '^\.git$', '^\.hg$', '^\.svn$', '\.bzr$']
+let g:nerdtree_tabs_open_on_gui_startup=0
 
 Plugin 'tpope/vim-surround'
 Plugin 'tomasr/molokai'
 
-" Python
+" =====================================
+"         Python一条龙解决方案
+" =====================================
 Plugin 'klen/python-mode'
-" 显示行末的空格；
+" Pymode配置
+let g:pymode_lint = 1
+let g:pymode_lint_on_write = 1
+let g:pymode_folding = 0
+let g:pymode_lint_checkers=['pyflakes', 'pep8', 'mccabe']
+
+" =====================================
+"            显示行末的空格
+" =====================================
 Plugin 'vim-scripts/ShowTrailingWhitespace'
-" 更好的显示匹配的括号
+
+" =====================================
+"         更好的显示匹配的括号
+" =====================================
 Plugin 'luochen1990/rainbow'
 "0 if you want to enable it later via :RainbowToggle
 let g:rainbow_active = 1
+
 " 平滑滚动
 " 用rxvt似乎可以，先试试
 " 对于tmux来说，太慢了。。。忍痛割爱
@@ -51,58 +86,63 @@ let g:rainbow_active = 1
 Plugin 'kien/ctrlp.vim'
 Plugin 'godlygeek/tabular'
 Plugin 'tpope/vim-markdown'
-
 Plugin 'tomtom/tcomment_vim'
+
+" =====================================
+"          Go lang setting
+" =====================================
 Plugin 'fatih/vim-go'
+"let g:go_fmt_command = "goimports"
+let g:go_fmt_autosave = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+
 "修改Vim启动界面
 Plugin 'mhinz/vim-startify'
 
+" =====================================
+"          airline，状态栏设置
+" =====================================
 Plugin 'bling/vim-airline'
-" Track the engine.
-Plugin 'SirVer/ultisnips'
-
-" Snippets are separated from the engine. Add this if you want them:
-Plugin 'honza/vim-snippets'
-" 快速去行尾空格 [, + <Space>]
-Plugin 'bronson/vim-trailing-whitespace'
-" 类似Sublime的多光标编辑
-Plugin 'terryma/vim-multiple-cursors'
-
-map <leader><space> :FixWhitespace<cr>
-
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsListSnippets="<c-l>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<c-tab>"
-
-" 定义存放代码片段的文件夹 .vim/snippets下，使用自定义和默认的，将会的到全局，有冲突的会提示
-let g:UltiSnipsSnippetDirectories=["UltiSnips", "bundle/vim-snippets/UltiSnips"]
-
-""""""""""""""""""""""""""""""
-" airline 设置
-""""""""""""""""""""""""""""""
 set laststatus=2
 let g:airline_detect_whitespace          = 1 "空白符检测
 let g:airline#extensions#tabline#enabled = 1 "顶部tab栏显示
 let g:airline_theme                      = "bubblegum" "设定主题
 
+" =====================================
+"               代码片段
+" =====================================
+Plugin 'SirVer/ultisnips'
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsListSnippets="<c-l>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<c-tab>"
+" 定义存放代码片段的文件夹 .vim/snippets下，使用自定义和默认的，将会的到全局，有冲突的会提示
+let g:UltiSnipsSnippetDirectories=["UltiSnips", "bundle/vim-snippets/UltiSnips"]
+
+" Snippets are separated from the engine. Add this if you want them:
+Plugin 'honza/vim-snippets'
+
+" =====================================
+"     快速去行尾空格 [, + <Space>]
+" =====================================
+Plugin 'bronson/vim-trailing-whitespace'
+map <leader><space> :FixWhitespace<cr>
+
+" 类似Sublime的多光标编辑
+Plugin 'terryma/vim-multiple-cursors'
+
+" =====================================
+"              Vim配置选项
+" =====================================
 "let g:molokai_original = 1"
 let g:rehash256=1
 
 colorscheme molokai
 
 set t_Co=256
-
-" indent line 设置
-let g:indentLine_color_gui = '#9370DB'
-let g:indentLine_char = '┊'
-
-" Pymode配置
-let g:pymode_lint = 1
-let g:pymode_lint_on_write = 1
-let g:pymode_folding = 0
-let g:pymode_lint_checkers=['pyflakes', 'pep8', 'mccabe']
 
 if !exists("syntax_on")
     syntax on
@@ -112,9 +152,9 @@ endif
 set clipboard=unnamed
 " let g:copycat#auto_sync = 1
 
-" =========================
-" 控制、显示相关的设置
-" =========================
+" =====================================
+"          控制、显示相关的设置
+" =====================================
 set scrolloff=3     " 光标移动到buffer的顶部和底部时保持3行距离
 set ttyfast
 set lazyredraw
@@ -135,8 +175,6 @@ set softtabstop=4
 
 "自动缩进
 set autoindent
-"智能缩进
-set si
 " 更方便的退格键
 set backspace=2
 " 行号
@@ -149,9 +187,9 @@ set noerrorbells         " don't beep
 " set cursorline          " 突出显示当前行
 " set cursorcolumn        "突出显示当前列
 
-" ==========================
-" 文件编码相关
-" ==========================
+" =====================================
+"            文件编码相关
+" =====================================
 
 " 无备份文件
 set nobackup
@@ -179,9 +217,9 @@ language messages zh_CN.utf-8
 source $VIMRUNTIME/delmenu.vim
 source $VIMRUNTIME/menu.vim
 
-" ===================================================
-"   Vim窗口和标签页操作优化
-" ==================================================
+" =====================================
+"       Vim窗口和标签页操作优化
+" =====================================
 
 " 更方便的在窗口之间跳转
 map <C-j> <C-W>j
@@ -218,15 +256,11 @@ noremap <leader>8 8gt
 noremap <leader>9 9gt
 noremap <leader>0 :tablast<cr>
 
-"Reselect visual block after indent/outdent.调整缩进后自动选中，方便再次操作
+" 调整缩进后自动选中，方便再次操作
 vnoremap < <gv
 vnoremap > >gv
 
-" YCM配置
-" let g:loaded_youcompleteme = 1
-let g:ycm_confirm_extra_conf = 0
-let g:ycm_key_list_select_completion = ['<c-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
+
 
 "对相应的文件进行特殊设置
 if has("autocmd")
@@ -252,7 +286,6 @@ if has("autocmd")
         autocmd BufRead *.java map <F5> :RunJava<CR>
     endif
 endif
-
 
 " 在图形界面和终端的配色方案、字体
 if has("gui_running")
@@ -287,26 +320,14 @@ if has('multi_byte_ime')
     inoremap <silent> <ESC> <ESC>:set iminsert=2<CR>
 endif
 
-" NerdTree配置
-nmap <F3> :NERDTree <CR>
-nmap <F4> :NERDTreeClose <CR>
-let NERDTreeIgnore=['\.py[cd]$', '\~$', '\.swo$', '\.swp$', '^\.git$', '^\.hg$', '^\.svn$', '\.bzr$']
-let g:nerdtree_tabs_open_on_gui_startup=0
-
-
 " 默认路径修改
 if has("win32") || has ("win64")
     cd d:\workspace
 endif
 
-" Go lang setting
-"let g:go_fmt_command = "goimports"
-let g:go_fmt_autosave = 1
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_structs = 1
-
-" 功能函数配置
+" =====================================
+"             功能函数配置
+" =====================================
 function! FontChangeOnResize()
     if &columns > 100
         set guifont=Droid\ Sans\ Mono\ 14
