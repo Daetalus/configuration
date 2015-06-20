@@ -39,7 +39,7 @@ Plugin 'Yggdroot/indentLine'
 " Plugin 'nathanaelkane/vim-indent-guides'
 " indent line 设置
 let g:indentLine_color_gui = '#9370DB'
-let g:indentLine_char = '┊'
+let g:indentLine_char = "┊""
 
 " =====================================
 "             NERDTRee
@@ -294,16 +294,16 @@ if has("gui_running")
     " 在图形界面和终端的配色方案、字体
     set columns=120 lines=40    "设置gui默认界面大小
     if has("unix")
-        set guifont=Droid\ Sans\ Mono\ 10
-        set guifontwide=思源黑体\ CN\ 10
+        set guifont=Source\ Code\ Pro\ 11
+        set guifontwide=思源黑体\ CN\ 11
     elseif has("win32")
         " vsplit window, such as NERDTree will change window postion
         " see http://vim.1045645.n5.nabble.com/Vertical-split-changing-GVim-application-window-position-td5709140.html
         set guioptions+=l
         set guioptions-=L
         set guioptions+=r
-        set guifont=Consolas:h10
-        set guifontwide=Microsoft\ YaHei\ Mono:h10 " guifontwide只有在encoding=utf-8时才生效
+        set guifont=Source\ Code\ Pro:h11
+        set guifontwide=Microsoft\ YaHei\ Mono:h11 " guifontwide只有在encoding=utf-8时才生效
     endif
 endif
 
@@ -328,28 +328,6 @@ endif
 " =====================================
 "             功能函数配置
 " =====================================
-function! FontChangeOnResize()
-    if &columns > 100
-        set guifont=Droid\ Sans\ Mono\ 14
-        set guifontwide=思源黑体\ CN\ 14
-    elseif &columns > 60 && &columns < 100
-        set guifont=Droid\ Sans\ Mono\ 10
-        set guifontwide=思源黑体\ CN\ 10
-    elseif &columns > 40 && &columns <60
-        set guifont=Droid\ Sans\ Mono\ 10
-        set guifontwide=思源黑体\ CN\ 10
-    elseif &columns > 20 && columns < 40
-        set guifont=Droid\ Sans\ Mono\ 10
-        set guifontwide=思源黑体\ CN\ 10
-    else
-        set guifont=Droid\ Sans\ Mono\ 10
-        set guifontwide=思源黑体\ CN\ 10
-    endif
-endfunction
-
-if has("unix")
-    autocmd VimResized * call FontChangeOnResize()
-endif
 
 " 保存文件时删除多余空格
 fun! <SID>StripTrailingWhitespaces()
