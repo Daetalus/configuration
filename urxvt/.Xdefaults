@@ -12,7 +12,6 @@ URxvt.loginShell: true
 URxvt.saveLines: 20000
 URxvt.internalBorder: 3
 URxvt.lineSpace: 0
- 
 URxvt*background:   #000000
 URxvt*foreground:   #d0d0d0
 
@@ -52,8 +51,21 @@ URxvt*color14:      #4eb4fa
 !white
 URxvt*color7:       #5f5f5f
 URxvt*color15:      #d0d0d0
- 
-URxvt*font: xft:DejaVu Sans Mono:size=14:antialias=true:hinting=true,xft:WenQuanYi Micro Hei Mono:pixelsize=18:minspace=true
+
+
+! Normal
+*URxvt*keysym.Home:		\033OH
+*URxvt*keysym.End:		\033OF
+*URxvt*keysym.F1:		\033OP
+*URxvt*keysym.F2:		\033OQ
+*URxvt*keysym.F3:		\033OR
+*URxvt*keysym.F4:		\033OS
+
+*URxvt*keysym.M-Up:		\033[1;3A
+*URxvt*keysym.M-Down:   \033[1;3B
+*URxvt*keysym.M-Right:  \033[1;3C
+*URxvt*keysym.M-Left:   \033[1;3D
+URxvt*font: xft:Source Code Pro:size=12:antialias=true:hinting=true,xft:WenQuanYi Micro Hei Mono:pixelsize=18:minspace=true
 xterm*locale:       true
 xterm.cjkWidth:     true
 urxvt.letterSpace: -1
@@ -61,7 +73,6 @@ urxvt.letterSpace: -1
 URxvt.perl-ext-common: ...,clipboard,...
 ! clipboard
 URxvt.keysym.Shift-Control-V: perl:clipboard:paste
-URxvt.iso14755: False
 URxvt.keysym.Shift-Control-C: perl:clipboard:copy
 ! 禁用到Ctrl+Shift的输入特殊字符功能
-URxvt*iso14755_52: false
+URxvt.iso14755: False
