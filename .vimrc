@@ -186,6 +186,7 @@ set novisualbell         " don't beep
 set noerrorbells         " don't beep
 " set cursorline          " 突出显示当前行
 " set cursorcolumn        "突出显示当前列
+noremap <F1> <Esc>
 
 " =====================================
 "            文件编码相关
@@ -294,8 +295,8 @@ if has("gui_running")
     " 在图形界面和终端的配色方案、字体
     set columns=120 lines=40    "设置gui默认界面大小
     if has("unix")
-        set guifont=Source\ Code\ Pro\ 11
-        set guifontwide=思源黑体\ CN\ 11
+        set guifont=Source\ Code\ Pro\ 12
+        set guifontwide=思源黑体\ CN\ 12
     elseif has("win32")
         " vsplit window, such as NERDTree will change window postion
         " see http://vim.1045645.n5.nabble.com/Vertical-split-changing-GVim-application-window-position-td5709140.html
