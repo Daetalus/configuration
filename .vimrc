@@ -62,6 +62,7 @@ Plugin 'tomasr/molokai'
 Plugin 'klen/python-mode'
 " Pymode配置
 let g:pymode_lint = 1
+let g:pymode_rope_autoimport = 0
 let g:pymode_lint_on_write = 1
 let g:pymode_folding = 0
 let g:pymode_lint_checkers=['pyflakes', 'pep8', 'mccabe']
@@ -81,7 +82,7 @@ let g:rainbow_active = 1
 " 平滑滚动
 " 用rxvt似乎可以，先试试
 " 对于tmux来说，太慢了。。。忍痛割爱
-" Plugin 'yonchu/accelerated-smooth-scroll'
+Plugin 'yonchu/accelerated-smooth-scroll'
 
 Plugin 'kien/ctrlp.vim'
 Plugin 'godlygeek/tabular'
