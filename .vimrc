@@ -63,6 +63,7 @@ Plugin 'klen/python-mode'
 " Pymode配置
 let g:pymode_lint = 1
 let g:pymode_rope_autoimport = 0
+let g:pymode_rope_lookup_project = 0
 let g:pymode_lint_on_write = 1
 let g:pymode_folding = 0
 let g:pymode_lint_checkers=['pyflakes', 'pep8', 'mccabe']
@@ -296,8 +297,8 @@ if has("gui_running")
     " 在图形界面和终端的配色方案、字体
     set columns=120 lines=40    "设置gui默认界面大小
     if has("unix")
-        set guifont=Source\ Code\ Pro\ 12
-        set guifontwide=思源黑体\ CN\ 12
+        set guifont=Source\ Code\ Pro\ 11
+        set guifontwide=思源黑体\ CN\ 11
     elseif has("win32")
         " vsplit window, such as NERDTree will change window postion
         " see http://vim.1045645.n5.nabble.com/Vertical-split-changing-GVim-application-window-position-td5709140.html
