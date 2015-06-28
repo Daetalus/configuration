@@ -56,7 +56,7 @@ let g:nerdtree_tabs_open_on_gui_startup=0
 Plugin 'tpope/vim-surround'
 Plugin 'terryma/vim-expand-region'
 Plugin 'tpope/vim-repeat'
-
+Plugin 'easymotion/vim-easymotion'
 Plugin 'tomasr/molokai'
 
 " =====================================
