@@ -83,7 +83,7 @@ Plugin 'luochen1990/rainbow'
 "0 if you want to enable it later via :RainbowToggle
 let g:rainbow_active = 1
 let g:rainbow_conf = {
-\   'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
+\   'guifgs': ['orchid', 'seagreen3', 'darkorange3', 'firebrick'],
 \   'ctermfgs': ['lightblue', 'magenta', 'darkgreen', 'darkcyan', 'brown'],
 \   'operators': '_,_',
 \   'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
