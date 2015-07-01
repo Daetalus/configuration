@@ -27,6 +27,9 @@ if has('unix')
     Plugin 'Valloric/YouCompleteMe'
     " YCM配置
     " let g:loaded_youcompleteme = 1
+    " 不显示Preview窗口
+    set completeopt-=preview
+    let g:ycm_add_preview_to_completeopt = 0
     let g:ycm_confirm_extra_conf = 0
     let g:ycm_key_list_select_completion = ['<c-n>', '<Down>']
     let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
@@ -113,6 +116,8 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'godlygeek/tabular'
 Plugin 'tpope/vim-markdown'
 Plugin 'tomtom/tcomment_vim'
+Plugin 'majutsushi/tagbar'
+nmap <F8> :TagbarToggle<CR>
 
 " =====================================
 "          Go lang setting
