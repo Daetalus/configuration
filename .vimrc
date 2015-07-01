@@ -334,8 +334,8 @@ if has("gui_running")
         set guioptions+=l
         set guioptions-=L
         set guioptions+=r
-        set guifont=Source\ Code\ Pro:h11
-        set guifontwide=Microsoft\ YaHei\ Mono:h11 " guifontwide只有在encoding=utf-8时才生效
+        set guifont=Source\ Code\ Pro:h10
+        set guifontwide=Microsoft\ YaHei\ Mono:h10 " guifontwide只有在encoding=utf-8时才生效
     endif
 endif
 
