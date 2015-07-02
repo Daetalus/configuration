@@ -263,6 +263,12 @@ map <C-l> <C-W>l
 map zl zL
 map zh zH
 
+" 在软折行上跳转
+nnoremap k gk
+nnoremap gk k
+nnoremap j gj
+nnoremap gj j
+
 " 更好的操作不同tab
 " http://vim.wikia.com/wiki/Alternative_tab_navigation
 " http://stackoverflow.com/questions/2005214/switching-to-a-particular-tab-in-vim
