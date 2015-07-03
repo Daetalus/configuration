@@ -61,6 +61,7 @@ Plugin 'terryma/vim-expand-region'
 Plugin 'tpope/vim-repeat'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'tomasr/molokai'
+Plugin 'christoomey/vim-tmux-navigator'
 
 " =====================================
 "         Python一条龙解决方案
@@ -297,8 +298,6 @@ noremap <leader>0 :tablast<cr>
 " 调整缩进后自动选中，方便再次操作
 vnoremap < <gv
 vnoremap > >gv
-
-
 
 "对相应的文件进行特殊设置
 if has("autocmd")
