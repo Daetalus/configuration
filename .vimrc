@@ -309,6 +309,10 @@ if has("autocmd")
 
     " for Go lang
     autocmd BufRead *.go set syn=go
+    au FileType go nmap <leader>r <Plug>(go-run)
+    au FileType go nmap <leader>b <Plug>(go-build)
+    au FileType go nmap <leader>t <Plug>(go-test)
+    au FileType go nmap <leader>c <Plug>(go-coverage)
     " for Markdown
     augroup markdown
         au!
