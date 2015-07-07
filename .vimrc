@@ -12,7 +12,6 @@ elseif has('unix')
     set rtp+=~/.vim/bundle/vundle/
     call vundle#rc()
 endif
-
 " let Vundle manage Vundle
 Plugin 'gmarik/vundle'
 filetype plugin indent on
@@ -188,6 +187,8 @@ set clipboard=unnamed
 " =====================================
 "          控制、显示相关的设置
 " =====================================
+set fillchars=vert:│ "让垂直分割栏变成实线
+
 set scrolloff=3     " 光标移动到buffer的顶部和底部时保持3行距离
 set ttyfast
 set lazyredraw
@@ -222,9 +223,12 @@ set noerrorbells         " don't beep
 noremap <F1> <Esc>
 
 " =====================================
-"            文件编码相关
+"            文件及编码相关
 " =====================================
 
+set autochdir
+" 获得权限写入文档
+cnoremap w!! w !sudo dd of=%
 " 无备份文件
 set nobackup
 " 关闭交换文件
@@ -361,6 +365,12 @@ if has('multi_byte_ime')
     " 插入模式输入法状态未被记录时，默认关闭IME
     inoremap <silent> <ESC> <ESC>:set iminsert=2<CR>
 endif
+
+if has("unix")
+    au InsertEnter * set noimdisable
+    au InsertLeave * set imdisable
+endif
+
 
 " 默认路径修改
 if has("win32") || has ("win64")
