@@ -182,6 +182,11 @@ endif
 
 "vim和系统共用剪切板
 set clipboard=unnamed
+
+if has('unnamedplus')
+    set clipboard=unnamed,unnamedplus
+endif
+
 " let g:copycat#auto_sync = 1
 
 " =====================================
@@ -258,7 +263,7 @@ source $VIMRUNTIME/menu.vim
 " =====================================
 "       Vim窗口和标签页操作优化
 " =====================================
-
+autocmd BufEnter * setlocal bufhidden=delete
 " 更方便的在窗口之间跳转
 map <C-j> <C-W>j
 map <C-k> <C-W>k
