@@ -110,7 +110,9 @@ let g:rainbow_conf = {
 \}
 " 平滑滚动
 " 用rxvt似乎可以，先试试
-" 对于tmux来说，太慢了。。。忍痛割爱
+" 在uxrvt下可以在垂直分割后的面板中使用平滑滚动
+" 在gnome terminal或terminator中不要使用垂直分割后平滑滚动
+" 滚动速度太慢了，gvim中没有问题
 Plugin 'yonchu/accelerated-smooth-scroll'
 
 Plugin 'kien/ctrlp.vim'
@@ -223,6 +225,7 @@ set ruler
 " 去掉输入错误的提示声音
 set novisualbell         " don't beep
 set noerrorbells         " don't beep
+" 会对滚动效率有影响，暂时禁用
 " set cursorline          " 突出显示当前行
 " set cursorcolumn        "突出显示当前列
 noremap <F1> <Esc>
@@ -358,7 +361,7 @@ if has("gui_running")
     endif
 endif
 
-" TODO Windows下有效，Linux下待测
+" Windows下有效，Linux目前直接在普通模式禁用输入法
 " 输入法设置
 if has('multi_byte_ime')
     "未开启IME时光标背景色
@@ -408,6 +411,3 @@ function! AutoSetFileHead()
     normal o
     normal o
 endfunc
-
-" 致谢：
-" k-vim配置
