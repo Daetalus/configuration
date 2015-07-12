@@ -109,7 +109,6 @@ let g:rainbow_conf = {
 \   }
 \}
 " 平滑滚动
-" 用rxvt似乎可以，先试试
 " 在uxrvt下可以在垂直分割后的面板中使用平滑滚动
 " 在gnome terminal或terminator中不要使用垂直分割后平滑滚动
 " 滚动速度太慢了，gvim中没有问题
@@ -194,7 +193,7 @@ endif
 " =====================================
 "          控制、显示相关的设置
 " =====================================
-set fillchars=vert:│ "让垂直分割栏变成实线
+set fillchars=vert:│ "让命令行下的垂直分割栏变成实线
 
 set scrolloff=3     " 光标移动到buffer的顶部和底部时保持3行距离
 set ttyfast
