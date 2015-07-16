@@ -19,7 +19,10 @@ filetype plugin indent on
 " =====================================
 "         插件及其对应配置
 " =====================================
-Plugin 'jiangmiao/auto-pairs'
+
+" 括号匹配
+Plugin 'Raimondi/delimitMate'
+
 Plugin 'yianwillis/vimcdoc'
 
 if has('unix')
@@ -377,7 +380,6 @@ if has("unix")
     au InsertEnter * set noimdisable
     au InsertLeave * set imdisable
 endif
-
 
 " 默认路径修改
 if has("win32") || has ("win64")
