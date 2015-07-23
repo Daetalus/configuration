@@ -393,6 +393,7 @@ endif
 map <leader>a :call AutoSetFileHead()<cr>
 " 定义函数AutoSetFileHead，自动插入文件头
 autocmd BufNewFile *.sh,*.py exec ":call AutoSetFileHead()"
+
 function! AutoSetFileHead()
     "如果文件类型为.sh文件
     if &filetype == 'sh'
@@ -406,6 +407,11 @@ function! AutoSetFileHead()
         call setline(3, "from __future__ import division")
         call setline(4, "from __future__ import unicode_literals")
         call setline(5, "from __future__ import print_function")
+    endif
+
+    if &filetype == 'cpp'
+        call setline(1, "#include<iostream>")
+        call setline(2, "using namesapce std;")
     endif
 
     normal G
