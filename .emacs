@@ -12,15 +12,12 @@
  ;; If there is more than one, they won't work right.
  )
 ;; ============================================================
-;; Setting English Font
-(set-face-attribute
-  'default nil :font "Consolas 11")
- 
-;; Chinese Font
-(dolist (charset '(kana han symbol cjk-misc bopomofo))
-    (set-fontset-font (frame-parameter nil 'font)
-                      charset
-                      (font-spec :family "Microsoft Yahei" :size 16)))
+; Setting English Font
+(set-face-font 'default "Source Code Pro Semibold-12")
+(when window-system
+  (set-frame-position (selected-frame) 0 0)
+  (set-frame-size (selected-frame) 100 60))
+
 ;; ****************************************************************************
 ;; ================================= Built-ins ================================
 ;; ----------------------------------------------------------------------------
@@ -32,10 +29,7 @@
 ;;启动时自动打开上次打开过的文件
 ;;(desktop-save-mode 1)
 ;; 处理Warning: desktop file appears to be in use by PID 19237这个问题
-(setq-default desktop-load-locked-desktop t) 
-
-;; 使用标准的Win32对话框打开文件
-(load-file "~/.emacs.d/dlgopen.el")
+(setq-default desktop-load-locked-desktop t)
 
 ;; 标签页管理
 (setq EmacsPortable-global-tabbar 't) ; 开启标签栏支持
@@ -47,5 +41,7 @@
 ;; 没有提示音，也不闪屏。
 (setq ring-bell-function 'ignore)
 
+;; 关闭工具栏
+(tool-bar-mode -1)
 ;; ================================= Theme ================================
 ;; Molokai themes
