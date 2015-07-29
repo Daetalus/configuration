@@ -13,11 +13,28 @@
  )
 ;; ============================================================
 ; Setting English Font
-(set-face-font 'default "Source Code Pro Semibold-12")
+
+(set-language-environment 'UTF-8) 
+
+(set-locale-environment "UTF-8") 
+
 (when window-system
   (set-frame-position (selected-frame) 0 0)
   (set-frame-size (selected-frame) 100 60))
+  
+;;(set-face-font 'default "Source Code Pro-11")
 
+;; Setting English Font
+(set-face-attribute
+  'default nil :font "Source Code Pro-11")
+ 
+;; Chinese Font
+(dolist (charset '(kana han symbol cjk-misc bopomofo))
+    (set-fontset-font (frame-parameter nil 'font)
+                      charset
+                      (font-spec :family "思源黑体 CN Normal" :size 18)))
+
+(desktop-save-mode 1)
 ;; ****************************************************************************
 ;; ================================= Built-ins ================================
 ;; ----------------------------------------------------------------------------
