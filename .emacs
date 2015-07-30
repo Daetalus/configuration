@@ -14,20 +14,20 @@
 ;; ============================================================
 ; Setting English Font
 
-(set-language-environment 'UTF-8) 
+(set-language-environment 'UTF-8)
 
-(set-locale-environment "UTF-8") 
+(set-locale-environment "UTF-8")
 
 (when window-system
   (set-frame-position (selected-frame) 0 0)
   (set-frame-size (selected-frame) 100 60))
-  
+
 ;;(set-face-font 'default "Source Code Pro-11")
 
 ;; Setting English Font
 (set-face-attribute
   'default nil :font "Source Code Pro-11")
- 
+
 ;; Chinese Font
 (dolist (charset '(kana han symbol cjk-misc bopomofo))
     (set-fontset-font (frame-parameter nil 'font)
@@ -60,5 +60,15 @@
 
 ;; 关闭工具栏
 (tool-bar-mode -1)
+
+(require 'package) ;; You might already have this line
+(add-to-list 'package-archives
+             '("melpa" . "http://melpa.org/packages/"))
+(when (< emacs-major-version 24)
+  ;; For important compatibility libraries like cl-lib
+  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
+(package-initialize) ;; You might already have this line
+
 ;; ================================= Theme ================================
 ;; Molokai themes
+(load-theme 'monokai t)
