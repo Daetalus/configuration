@@ -1,10 +1,10 @@
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-enabled-themes (quote (tsdh-dark)))
- '(custom-safe-themes (quote ("9fd20670758db15cc4d0b4442a74543888d2e445646b25f2755c65dcd6f1504b" default))))
+; (custom-set-variables
+;  ;; custom-set-variables was added by Custom.
+;  ;; If you edit it by hand, you could mess it up, so be careful.
+;  ;; Your init file should contain only one such instance.
+;  ;; If there is more than one, they won't work right.
+; ;  '(custom-enabled-themes (quote (tsdh-dark)))
+;  '(custom-safe-themes (quote ("9fd20670758db15cc4d0b4442a74543888d2e445646b25f2755c65dcd6f1504b" default))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -58,6 +58,10 @@
 ;; 没有提示音，也不闪屏。
 (setq ring-bell-function 'ignore)
 
+;; set transparency
+; (set-frame-parameter (selected-frame) 'alpha '(85 85))
+; (add-to-list 'default-frame-alist '(alpha 85 85))
+;;
 ;; 关闭工具栏
 (tool-bar-mode -1)
 
@@ -71,4 +75,4 @@
 
 ;; ================================= Theme ================================
 ;; Molokai themes
-(load-theme 'monokai t)
+(load-theme 'atom-one-dark t)
