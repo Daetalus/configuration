@@ -43,6 +43,17 @@
 ;;在左边显示行号
 (global-linum-mode 'linum-mode)
 
+;; 关闭emacs启动时的页面
+(setq inhibit-startup-message 1)
+(setq gnus-inhibit-startup-message 1)
+
+;;; 设置备份策略
+ (setq make-backup-files t)
+ (setq kept-old-versions 2)
+ (setq kept-new-versions 2)
+ (setq delete-old-versions t)
+ (setq backup-directory-alist '(("" . "~/.emacsbackup")))
+
 ;;启动时自动打开上次打开过的文件
 ;;(desktop-save-mode 1)
 ;; 处理Warning: desktop file appears to be in use by PID 19237这个问题
