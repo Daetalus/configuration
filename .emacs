@@ -69,14 +69,6 @@
 ;; 没有提示音，也不闪屏。
 (setq ring-bell-function 'ignore)
 
-;; 以 y/n代表 yes/no
-(fset 'yes-or-no-p 'y-or-n-p) 
-
-;;滚动页面时比较舒服，不要整页的滚动 
-(setq scroll-step 1 
-scroll-margin 3 
-scroll-conservatively 10000) 
-
 ;; set transparency
 ; (set-frame-parameter (selected-frame) 'alpha '(85 85))
 ; (add-to-list 'default-frame-alist '(alpha 85 85))
@@ -95,3 +87,9 @@ scroll-conservatively 10000)
 ;; ================================= Theme ================================
 ;; Molokai themes
 (load-theme 'atom-one-dark t)
+
+(autoload 'markdown-mode "markdown-mode"
+          "Major mode for editing Markdown files" t)
+(add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
