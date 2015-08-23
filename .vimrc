@@ -41,7 +41,6 @@ endif
 "      Indent line，标注缩进线
 " =====================================
 Plugin 'Yggdroot/indentLine'
-" Plugin 'nathanaelkane/vim-indent-guides'
 " indent line 设置
 let g:indentLine_color_gui = '#9370DB'
 let g:indentLine_char = "┊""
@@ -114,7 +113,7 @@ let g:rainbow_conf = {
 " 平滑滚动
 " 在uxrvt下可以在垂直分割后的面板中使用平滑滚动
 " 在gnome terminal或terminator中不要使用垂直分割后平滑滚动
-" 滚动速度太慢了，gvim中没有问题
+" 滚动速度太慢了（似乎是因为高分辨率），gvim中没有问题
 Plugin 'yonchu/accelerated-smooth-scroll'
 
 Plugin 'kien/ctrlp.vim'
@@ -151,10 +150,10 @@ let g:airline_theme                      = "bubblegum" "设定主题
 " =====================================
 Plugin 'SirVer/ultisnips'
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsListSnippets="<c-l>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<c-tab>"
+let g:UltiSnipsExpandTrigger       = "<tab>"
+let g:UltiSnipsListSnippets        = "<c-l>"
+let g:UltiSnipsJumpForwardTrigger  = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<c-tab>"
 " 定义存放代码片段的文件夹 .vim/snippets下，使用自定义和默认的，将会的到全局，有冲突的会提示
 let g:UltiSnipsSnippetDirectories=["UltiSnips", "bundle/vim-snippets/UltiSnips"]
 
