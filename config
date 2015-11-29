@@ -1,0 +1,32 @@
+[global_config]
+  enabled_plugins = APTURLHandler, LaunchpadBugURLHandler
+  title_inactive_fg_color = "#e5c200"
+[keybindings]
+  switch_to_tab_4 = <Alt>4
+  switch_to_tab_5 = <Alt>5
+  switch_to_tab_2 = <Alt>2
+  switch_to_tab_3 = <Alt>3
+  switch_to_tab_1 = <Alt>1
+[profiles]
+  [[default]]
+    palette = "#181915:#e42b2b:#8dc947:#c5bb63:#5ec6cf:#75507b:#4194b0:#d3d7cf:#45473c:#e00265:#6dca04:#e6db74:#729fcf:#af5fff:#5cd1f8:#ffffff"
+    background_image = None
+    background_darkness = 0.7
+    background_type = transparent
+    use_system_font = False
+    cursor_color = "#62d047"
+    foreground_color = "#ffffff"
+    show_titlebar = False
+    font = Source Code Pro Medium 11
+    background_color = "#121212"
+    scrollback_infinite = True
+[layouts]
+  [[default]]
+    [[[child1]]]
+      type = Terminal
+      parent = window0
+    [[[window0]]]
+      type = Window
+      parent = ""
+      size = 1200, 800
+[plugins]
