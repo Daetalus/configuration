@@ -46,7 +46,7 @@ let g:indentLine_color_gui = '#9370DB'
 let g:indentLine_char = "┊""
 
 " =====================================
-"             NERDTRee
+"             NERDTree
 " =====================================
 Plugin 'scrooloose/nerdtree'
 Plugin 'jistr/vim-nerdtree-tabs'
@@ -55,6 +55,7 @@ nmap <F3> :NERDTree <CR>
 nmap <F4> :NERDTreeClose <CR>
 let NERDTreeHighlightCursorline=1
 let NERDTreeIgnore=['\.py[cd]$', '\~$', '\.swo$', '\.swp$', '^\.git$', '^\.hg$', '^\.svn$', '\.bzr$']
+map <leader>r :NERDTreeFind<cr>
 let g:nerdtree_tabs_open_on_gui_startup=0
 
 Plugin 'tpope/vim-surround'
@@ -113,10 +114,19 @@ let g:rainbow_conf = {
 " 平滑滚动
 " 在uxrvt下可以在垂直分割后的面板中使用平滑滚动
 " 在gnome terminal或terminator中不要使用垂直分割后平滑滚动
-" 滚动速度太慢了（似乎是因为高分辨率），gvim中没有问题
-Plugin 'yonchu/accelerated-smooth-scroll'
-
+" 滚动速度太慢了（似乎是因为Terminal模拟器在垂直切分时需要
+" 重新截断字符串并计算），gvim中没有问题
+if has("gui_running")
+    Plugin 'yonchu/accelerated-smooth-scroll'
+endif
+" =====================================
+"          CtrlP setting
+" =====================================
 Plugin 'kien/ctrlp.vim'
+let g:ctrlp_custom_ignore = {
+    \ 'dir':  '\v[\/]\.(git|hg|svn|rvm)$',
+    \ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz|pyc)$',
+    \ }
 Plugin 'godlygeek/tabular'
 Plugin 'tpope/vim-markdown'
 Plugin 'tomtom/tcomment_vim'
@@ -141,7 +151,7 @@ Plugin 'mhinz/vim-startify'
 " =====================================
 Plugin 'bling/vim-airline'
 set laststatus=2
-let g:airline_detect_whitespace          = 1 "空白符检测
+let g:airline#extensions#whitespace#enabled = 1 "空白符检测
 let g:airline#extensions#tabline#enabled = 1 "顶部tab栏显示
 let g:airline_theme                      = "bubblegum" "设定主题
 
@@ -349,8 +359,8 @@ if has("gui_running")
     " 在图形界面和终端的配色方案、字体
     set columns=120 lines=40    "设置gui默认界面大小
     if has("unix")
-        set guifont=Source\ Code\ Pro\ 11
-        set guifontwide=思源黑体\ CN\ 11
+        set guifont=Source\ Code\ Pro\ 10
+        set guifontwide=思源黑体\ CN\ 10
     elseif has("win32")
         " vsplit window, such as NERDTree will change window postion
         " see http://vim.1045645.n5.nabble.com/Vertical-split-changing-GVim-application-window-position-td5709140.html
@@ -365,19 +375,44 @@ endif
 " Windows下有效，Linux目前直接在普通模式禁用输入法
 " 输入法设置
 if has('multi_byte_ime')
-    "未开启IME时光标背景色
+"     "未开启IME时光标背景色
     hi Cursor guifg=bg guibg=Orange gui=NONE
-    "开启IME时光标背景色
+"     "开启IME时光标背景色
     hi CursorIM guifg=NONE guibg=Skyblue gui=NONE
     " 关闭Vim的自动切换IME输入法(插入模式和检索模式)
     set iminsert=0 imsearch=0
     " 插入模式输入法状态未被记录时，默认关闭IME
-    inoremap <silent> <ESC> <ESC>:set iminsert=2<CR>
+    inoremap <silent> <ESC> <ESC>:set imdisable<CR>
+    " inoremap <silent> <ESC> <ESC>:set iminsert=2<CR>
 endif
 
 if has("unix")
-    au InsertEnter * set noimdisable
-    au InsertLeave * set imdisable
+    " au InsertEnter * set noimdisable
+    " au InsertLeave * set imdisable
+    "##### auto fcitx  ###########
+    let g:input_toggle = 1
+    function! Fcitx2en()
+        let s:input_status = system("fcitx-remote")
+        if s:input_status == 2
+            let g:input_toggle = 1
+            let l:a = system("fcitx-remote -c")
+        endif
+    endfunction
+
+    function! Fcitx2zh()
+        let s:input_status = system("fcitx-remote")
+        if s:input_status != 2 && g:input_toggle == 1
+            let l:a = system("fcitx-remote -o")
+            let g:input_toggle = 0
+        endif
+    endfunction
+
+    set ttimeoutlen=150
+    "退出插入模式
+    autocmd InsertLeave * call Fcitx2en()
+    "进入插入模式
+    autocmd InsertEnter * call Fcitx2zh()
+    "##### auto fcitx end ######
 endif
 
 " 默认路径修改
@@ -417,3 +452,17 @@ function! AutoSetFileHead()
     normal o
     normal o
 endfunc
+
+if has('nvim')
+    let g:python_host_prog = '/usr/bin/python'
+    tnoremap <Esc> <C-\><C-n>
+    " didn't use it yet.
+    " tnoremap <A-h> <C-\><C-n><C-w>h
+    " tnoremap <A-j> <C-\><C-n><C-w>j
+    " tnoremap <A-k> <C-\><C-n><C-w>k
+    " tnoremap <A-l> <C-\><C-n><C-w>l
+    " nnoremap <A-h> <C-w>h
+    " nnoremap <A-j> <C-w>j
+    " nnoremap <A-k> <C-w>k
+    " nnoremap <A-l> <C-w>l
+endif
