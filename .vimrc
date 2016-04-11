@@ -352,16 +352,20 @@ if has("autocmd")
     endif
 endif
 
+map <silent> <F11>
+\    :call system("wmctrl -ir " . v:windowid . " -b toggle,fullscreen")<CR>
+
 " 在图形界面和终端的配色方案、字体
 if has("gui_running")
     " 窗体设置
     set guioptions-=T " 隐藏工具栏
     " 在图形界面和终端的配色方案、字体
-    set columns=120 lines=40    "设置gui默认界面大小
+    " set columns=120 lines=40    "设置gui默认界面大小
     if has("unix")
         set guifont=Source\ Code\ Pro\ 10
         set guifontwide=思源黑体\ CN\ 10
     elseif has("win32")
+        au GUIEnter * simalt ~x
         " vsplit window, such as NERDTree will change window postion
         " see http://vim.1045645.n5.nabble.com/Vertical-split-changing-GVim-application-window-position-td5709140.html
         set guioptions+=l
