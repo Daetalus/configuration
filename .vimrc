@@ -360,7 +360,7 @@ if has("gui_running")
     " 窗体设置
     set guioptions-=T " 隐藏工具栏
     " 在图形界面和终端的配色方案、字体
-    " set columns=120 lines=40    "设置gui默认界面大小
+    set columns=999 lines=999    "设置gui默认界面大小
     if has("unix")
         set guifont=Source\ Code\ Pro\ 10
         set guifontwide=思源黑体\ CN\ 10
