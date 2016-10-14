@@ -25,17 +25,12 @@ Plugin 'Raimondi/delimitMate'
 
 Plugin 'yianwillis/vimcdoc'
 
-if has('unix')
-    Plugin 'Valloric/YouCompleteMe'
-    " YCM配置
-    " let g:loaded_youcompleteme = 1
-    " 不显示Preview窗口
-    set completeopt-=preview
-    let g:ycm_add_preview_to_completeopt = 0
-    let g:ycm_confirm_extra_conf = 0
-    let g:ycm_key_list_select_completion = ['<c-n>', '<Down>']
-    let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
-endif
+
+" =====================================
+"               自动补全
+" =====================================
+Plugin 'maralla/completor.vim'
+Plugin 'davidhalter/jedi'
 
 " =====================================
 "      Indent line，标注缩进线
@@ -149,7 +144,8 @@ Plugin 'mhinz/vim-startify'
 " =====================================
 "          airline，状态栏设置
 " =====================================
-Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 set laststatus=2
 let g:airline#extensions#whitespace#enabled = 1 "空白符检测
 let g:airline#extensions#tabline#enabled = 1 "顶部tab栏显示
