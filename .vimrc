@@ -25,13 +25,27 @@ Plugin 'Raimondi/delimitMate'
 
 Plugin 'yianwillis/vimcdoc'
 
+" =====================================
+"         插件及其对应配置
+" =====================================
+Plugin 'CoatiSoftware/vim-sourcetrail'
 
 " =====================================
 "               自动补全
 " =====================================
 Plugin 'maralla/completor.vim'
 Plugin 'davidhalter/jedi'
-
+" if has('unix')
+"     Plugin 'Valloric/YouCompleteMe'
+"     " YCM配置
+"     " let g:loaded_youcompleteme = 1
+"     " 不显示Preview窗口
+"     set completeopt-=preview
+"     let g:ycm_add_preview_to_completeopt = 0
+"     let g:ycm_confirm_extra_conf = 0
+"     let g:ycm_key_list_select_completion = ['<c-n>', '<Down>']
+"     let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
+" endif
 " =====================================
 "      Indent line，标注缩进线
 " =====================================
