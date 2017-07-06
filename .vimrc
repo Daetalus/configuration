@@ -215,7 +215,6 @@ endif
 " =====================================
 "          控制、显示相关的设置
 " =====================================
-set fillchars=vert:│ "让命令行下的垂直分割栏变成实线
 
 set scrolloff=3     " 光标移动到buffer的顶部和底部时保持3行距离
 set ttyfast
@@ -383,21 +382,23 @@ if has("gui_running")
         set guioptions+=r
         set guifont=Source\ Code\ Pro:h10
         set guifontwide=Microsoft\ YaHei\ Mono:h10 " guifontwide只有在encoding=utf-8时才生效
+        set vb t_vb=  " Disable the bell in Windows GVim
     endif
+else
+    set fillchars=vert:│ "让命令行下的垂直分割栏变成实线
 endif
 
 " Windows下有效，Linux目前直接在普通模式禁用输入法
 " 输入法设置
 if has('multi_byte_ime')
-"     "未开启IME时光标背景色
+    "未开启IME时光标背景色
     hi Cursor guifg=bg guibg=Orange gui=NONE
-"     "开启IME时光标背景色
+    "开启IME时光标背景色
     hi CursorIM guifg=NONE guibg=Skyblue gui=NONE
     " 关闭Vim的自动切换IME输入法(插入模式和检索模式)
     set iminsert=0 imsearch=0
     " 插入模式输入法状态未被记录时，默认关闭IME
-    inoremap <silent> <ESC> <ESC>:set imdisable<CR>
-    " inoremap <silent> <ESC> <ESC>:set iminsert=2<CR>
+    inoremap <silent> <ESC> <ESC>:set iminsert=2<CR>
 endif
 
 if has("unix")
