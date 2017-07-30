@@ -9,7 +9,7 @@ if has('win32') || has('win64')
     set rtp+=$VIM/vimfiles/bundle/vundle/
     call vundle#rc('$VIM/vimfiles/bundle/')
 elseif has('unix')
-    set rtp+=~/.vim/bundle/vundle/
+    set rtp+=~/.vim/bundle/Vundle.vim
     call vundle#rc()
 endif
 " let Vundle manage Vundle
@@ -26,9 +26,13 @@ Plugin 'Raimondi/delimitMate'
 Plugin 'yianwillis/vimcdoc'
 
 " =====================================
-"         插件及其对应配置
+"     只打算在Linux下使用Sourcetrail
 " =====================================
-Plugin 'CoatiSoftware/vim-sourcetrail'
+if has('unix')
+    Plugin 'CoatiSoftware/vim-sourcetrail'
+    nnoremap <leader>as :SourcetrailRefresh<CR>
+    nnoremap <leader>aa :SourcetrailActivateToken<CR>
+endif
 
 " =====================================
 "               自动补全
@@ -250,6 +254,8 @@ set noerrorbells         " don't beep
 " set cursorline          " 突出显示当前行
 " set cursorcolumn        "突出显示当前列
 noremap <F1> <Esc>
+" ,s 用来快速保存文件
+noremap <leader>s :update<cr>
 
 " =====================================
 "            文件及编码相关
