@@ -81,7 +81,7 @@ Plugin 'christoomey/vim-tmux-navigator'
 " =====================================
 "         Python一条龙解决方案
 " =====================================
-Plugin 'klen/python-mode'
+Plugin 'python-mode/python-mode'
 " Pymode配置
 let g:pymode_lint = 1
 let g:pymode_rope_complete_on_dot = 0
