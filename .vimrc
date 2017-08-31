@@ -13,7 +13,7 @@ elseif has('unix')
     call vundle#rc()
 endif
 " let Vundle manage Vundle
-Plugin 'gmarik/vundle'
+Plugin 'VundleVim/Vundle.vim'
 filetype plugin indent on
 
 " =====================================
@@ -38,6 +38,11 @@ endif
 "               自动补全
 " =====================================
 Plugin 'maralla/completor.vim'
+if has('unix')
+    let g:completor_python_binary = '/usr/bin/python3'
+    let g:completor_clang_binary = '/usr/bin/clang'
+endif
+
 Plugin 'davidhalter/jedi'
 " if has('unix')
 "     Plugin 'Valloric/YouCompleteMe'
@@ -89,6 +94,7 @@ let g:pymode_rope_autoimport = 0
 let g:pymode_rope_lookup_project = 0
 let g:pymode_lint_on_write = 1
 let g:pymode_folding = 0
+let g:pymode_rope_goto_definition_cmd = 'new'
 let g:pymode_lint_checkers=['pyflakes', 'pep8', 'mccabe']
 
 " =====================================
@@ -167,6 +173,11 @@ Plugin 'vim-airline/vim-airline-themes'
 set laststatus=2
 let g:airline#extensions#whitespace#enabled = 1 "空白符检测
 let g:airline#extensions#tabline#enabled = 1 "顶部tab栏显示
+let g:airline#extensions#tabline#switch_buffers_and_tabs = 1
+let g:airline#extensions#tabline#show_buffers=2 "总是显示buffer
+let g:airline#extensions#tabline#show_tabs=0 "不显示tab
+let g:airline#extensions#tabline#show_tab_nr = 1
+let g:airline#extensions#tabline#buffer_idx_mode = 1
 let g:airline_theme                      = "bubblegum" "设定主题
 
 " =====================================
@@ -292,7 +303,7 @@ source $VIMRUNTIME/menu.vim
 " =====================================
 "       Vim窗口和标签页操作优化
 " =====================================
-autocmd BufEnter * setlocal bufhidden=delete
+" autocmd BufEnter * setlocal bufhidden=delete
 " 更方便的在窗口之间跳转
 map <C-j> <C-W>j
 map <C-k> <C-W>k
@@ -312,8 +323,8 @@ nnoremap gj j
 " 更好的操作不同tab
 " http://vim.wikia.com/wiki/Alternative_tab_navigation
 " http://stackoverflow.com/questions/2005214/switching-to-a-particular-tab-in-vim
-map <leader>th :tabnext<cr>
-map <leader>tl :tabprev<cr>
+map <leader>tl :tabnext<cr>
+map <leader>th :tabprev<cr>
 map <leader>te :tabedit<cr>
 map <leader>tc :tabclose<cr>
 map <leader>tm :tabm<cr>
@@ -333,6 +344,46 @@ noremap <leader>7 7gt
 noremap <leader>8 8gt
 noremap <leader>9 9gt
 noremap <leader>0 :tablast<cr>
+
+" Move to the next buffer
+nmap <leader>l :bnext<CR>
+" Move to the previous buffer
+nmap <leader>h :bprevious<CR>
+
+" Close the current buffer and move to the previous one
+" This replicates the idea of closing a tab
+nmap <leader>bq :bp <BAR> bd #<CR>
+" Show all open buffers and their status
+nmap <leader>bl :ls<CR>
+
+Plugin 'jlanzarotta/bufexplorer'
+" normal 模式下切换buffer
+if has("gui_running")
+    nmap <A-1> <Plug>AirlineSelectTab1
+    nmap <A-2> <Plug>AirlineSelectTab2
+    nmap <A-3> <Plug>AirlineSelectTab3
+    nmap <A-4> <Plug>AirlineSelectTab4
+    nmap <A-5> <Plug>AirlineSelectTab5
+    nmap <A-6> <Plug>AirlineSelectTab6
+    nmap <A-7> <Plug>AirlineSelectTab7
+    nmap <A-8> <Plug>AirlineSelectTab8
+    nmap <A-9> <Plug>AirlineSelectTab9
+    nmap <A-l> <Plug>AirlineSelectPrevTab
+    nmap <A-h> <Plug>AirlineSelectNextTab
+else
+    " not work, why???
+    noremap <leader>b1 <Plug>AirlineSelectTab1
+    noremap <leader>b2 <Plug>AirlineSelectTab2
+    noremap <leader>b3 <Plug>AirlineSelectTab3
+    noremap <leader>b4 <Plug>AirlineSelectTab4
+    noremap <leader>b5 <Plug>AirlineSelectTab5
+    noremap <leader>b6 <Plug>AirlineSelectTab6
+    noremap <leader>b7 <Plug>AirlineSelectTab7
+    noremap <leader>b8 <Plug>AirlineSelectTab8
+    noremap <leader>b9 <Plug>AirlineSelectTab9
+    noremap <leader>bh <Plug>AirlineSelectPrevTab
+    noremap <leader>bl <Plug>AirlineSelectNextTab
+endif
 
 " 调整缩进后自动选中，方便再次操作
 vnoremap < <gv
@@ -374,6 +425,7 @@ map <silent> <F11>
 if has("gui_running")
     " 窗体设置
     set guioptions-=T " 隐藏工具栏
+    set guioptions-=m " 隐藏菜单栏
     " 在图形界面和终端的配色方案、字体
     set columns=999 lines=999    "设置gui默认界面大小
     if has("unix")
