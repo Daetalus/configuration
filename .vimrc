@@ -9,7 +9,7 @@ if has('win32') || has('win64')
     set rtp+=$VIM/vimfiles/bundle/vundle/
     call vundle#rc('$VIM/vimfiles/bundle/')
 elseif has('unix')
-    set rtp+=~/.vim/bundle/vundle/
+    set rtp+=~/.vim/bundle/Vundle.vim
     call vundle#rc()
 endif
 " let Vundle manage Vundle
@@ -245,6 +245,7 @@ set ruler
 " 去掉输入错误的提示声音
 set novisualbell         " don't beep
 set noerrorbells         " don't beep
+set vb t_vb=  " Disable the bell in GVim What about Linux?
 " 会对滚动效率有影响，暂时禁用
 " set cursorline          " 突出显示当前行
 " set cursorcolumn        "突出显示当前列
