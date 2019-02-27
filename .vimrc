@@ -6,8 +6,8 @@ let g:mapleader = ','
 
 " 规定Vundle的路径和插件安装路径
 if has('win32') || has('win64')
-    set rtp+=$VIM/vimfiles/bundle/vundle/
-    call vundle#rc('$VIM/vimfiles/bundle/')
+    set rtp+=$VIM/vimfiles/bundle/Vundle.vim
+    call vundle#begin('$VIM/vimfiles/bundle/')
 elseif has('unix')
     set rtp+=~/.vim/bundle/Vundle.vim
     call vundle#rc()
@@ -430,7 +430,7 @@ if has("gui_running")
     " 在图形界面和终端的配色方案、字体
     set columns=999 lines=999    "设置gui默认界面大小
     if has("unix")
-        set guifont=Source\ Code\ Pro\ 10
+        set guifont=Source\ Code\ Variable\ 10
         set guifontwide=思源黑体\ CN\ 10
     elseif has("win32")
         au GUIEnter * simalt ~x
@@ -439,8 +439,9 @@ if has("gui_running")
         set guioptions+=l
         set guioptions-=L
         set guioptions+=r
-        set guifont=Source\ Code\ Pro:h10
-        set guifontwide=Microsoft\ YaHei\ Mono:h10 " guifontwide只有在encoding=utf-8时才生效
+        set guifont=Source\ Code\ Variable:h10
+        " set guifontwide=Microsoft\ YaHei\ Mono:h10 " guifontwide只有在encoding=utf-8时才生效
+        set guifontwide=等距更纱黑体\ SC:h10
         set vb t_vb=  " Disable the bell in Windows GVim
     endif
 else
@@ -491,7 +492,7 @@ endif
 
 " 默认路径修改
 if has("win32") || has ("win64")
-    cd d:\workspace
+    cd e:\workspace
 endif
 
 " =====================================
