@@ -4,46 +4,52 @@ set nocompatible
 let mapleader = ','
 let g:mapleader = ','
 
-" 规定Vundle的路径和插件安装路径
-if has('win32') || has('win64')
-    set rtp+=$VIM/vimfiles/bundle/Vundle.vim
-    call vundle#begin('$VIM/vimfiles/bundle/')
-elseif has('unix')
-    set rtp+=~/.vim/bundle/Vundle.vim
-    call vundle#rc()
-endif
-" let Vundle manage Vundle
-Plugin 'VundleVim/Vundle.vim'
-filetype plugin indent on
-
+call plug#begin()
+" 括号匹配
+Plug 'Raimondi/delimitMate'
+Plug 'yianwillis/vimcdoc'
+Plug 'maralla/completor.vim'
+Plug 'davidhalter/jedi'
+Plug 'Yggdroot/indentLine'
+Plug 'scrooloose/nerdtree'
+Plug 'jistr/vim-nerdtree-tabs'
+Plug 'tpope/vim-surround'
+Plug 'terryma/vim-expand-region'
+Plug 'tpope/vim-repeat'
+Plug 'easymotion/vim-easymotion'
+Plug 'tomasr/molokai'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'python-mode/python-mode'
+Plug 'vim-scripts/ShowTrailingWhitespace'
+Plug 'luochen1990/rainbow'
+Plug 'kien/ctrlp.vim'
+Plug 'godlygeek/tabular'
+Plug 'tpope/vim-markdown'
+Plug 'tomtom/tcomment_vim'
+Plug 'majutsushi/tagbar'
+Plug 'fatih/vim-go'
+Plug 'mhinz/vim-startify'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'bronson/vim-trailing-whitespace'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'jlanzarotta/bufexplorer'
+call plug#end()
 " =====================================
 "         插件及其对应配置
 " =====================================
 
-" 括号匹配
-Plugin 'Raimondi/delimitMate'
-
-Plugin 'yianwillis/vimcdoc'
-
-" =====================================
-"     只打算在Linux下使用Sourcetrail
-" =====================================
-if has('unix')
-    Plugin 'CoatiSoftware/vim-sourcetrail'
-    nnoremap <leader>as :SourcetrailRefresh<CR>
-    nnoremap <leader>aa :SourcetrailActivateToken<CR>
-endif
 
 " =====================================
 "               自动补全
 " =====================================
-Plugin 'maralla/completor.vim'
 if has('unix')
     let g:completor_python_binary = '/usr/bin/python3'
     let g:completor_clang_binary = '/usr/bin/clang'
 endif
 
-Plugin 'davidhalter/jedi'
 " if has('unix')
 "     Plugin 'Valloric/YouCompleteMe'
 "     " YCM配置
@@ -58,7 +64,6 @@ Plugin 'davidhalter/jedi'
 " =====================================
 "      Indent line，标注缩进线
 " =====================================
-Plugin 'Yggdroot/indentLine'
 " indent line 设置
 let g:indentLine_color_gui = '#9370DB'
 let g:indentLine_char = "┊""
@@ -66,8 +71,6 @@ let g:indentLine_char = "┊""
 " =====================================
 "             NERDTree
 " =====================================
-Plugin 'scrooloose/nerdtree'
-Plugin 'jistr/vim-nerdtree-tabs'
 " NerdTree配置
 nmap <F3> :NERDTree <CR>
 nmap <F4> :NERDTreeClose <CR>
@@ -76,17 +79,10 @@ let NERDTreeIgnore=['\.py[cd]$', '\~$', '\.swo$', '\.swp$', '^\.git$', '^\.hg$',
 map <leader>r :NERDTreeFind<cr>
 let g:nerdtree_tabs_open_on_gui_startup=0
 
-Plugin 'tpope/vim-surround'
-Plugin 'terryma/vim-expand-region'
-Plugin 'tpope/vim-repeat'
-Plugin 'easymotion/vim-easymotion'
-Plugin 'tomasr/molokai'
-Plugin 'christoomey/vim-tmux-navigator'
 
 " =====================================
 "         Python一条龙解决方案
 " =====================================
-Plugin 'python-mode/python-mode'
 " Pymode配置
 let g:pymode_lint = 1
 let g:pymode_rope_complete_on_dot = 0
@@ -100,12 +96,10 @@ let g:pymode_lint_checkers=['pyflakes', 'pep8', 'mccabe']
 " =====================================
 "            显示行末的空格
 " =====================================
-Plugin 'vim-scripts/ShowTrailingWhitespace'
 
 " =====================================
 "         更好的显示匹配的括号
 " =====================================
-Plugin 'luochen1990/rainbow'
 "0 if you want to enable it later via :RainbowToggle
 let g:rainbow_active = 1
 let g:rainbow_conf = {
@@ -141,21 +135,16 @@ endif
 " =====================================
 "          CtrlP setting
 " =====================================
-Plugin 'kien/ctrlp.vim'
 let g:ctrlp_custom_ignore = {
     \ 'dir':  '\v[\/]\.(git|hg|svn|rvm)$',
     \ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz|pyc)$',
     \ }
-Plugin 'godlygeek/tabular'
-Plugin 'tpope/vim-markdown'
-Plugin 'tomtom/tcomment_vim'
-Plugin 'majutsushi/tagbar'
+
 nmap <F8> :TagbarToggle<CR>
 
 " =====================================
 "          Go lang setting
 " =====================================
-Plugin 'fatih/vim-go'
 "let g:go_fmt_command = "goimports"
 let g:go_fmt_autosave = 1
 let g:go_highlight_functions = 1
@@ -163,13 +152,10 @@ let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
 
 "修改Vim启动界面
-Plugin 'mhinz/vim-startify'
 
 " =====================================
 "          airline，状态栏设置
 " =====================================
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
 set laststatus=2
 let g:airline#extensions#whitespace#enabled = 1 "空白符检测
 let g:airline#extensions#tabline#enabled = 1 "顶部tab栏显示
@@ -183,7 +169,6 @@ let g:airline_theme                      = "bubblegum" "设定主题
 " =====================================
 "               代码片段
 " =====================================
-Plugin 'SirVer/ultisnips'
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger       = "<tab>"
 let g:UltiSnipsListSnippets        = "<c-l>"
@@ -193,16 +178,13 @@ let g:UltiSnipsJumpBackwardTrigger = "<c-tab>"
 let g:UltiSnipsSnippetDirectories=["UltiSnips", "bundle/vim-snippets/UltiSnips"]
 
 " Snippets are separated from the engine. Add this if you want them:
-Plugin 'honza/vim-snippets'
 
 " =====================================
 "     快速去行尾空格 [, + <Space>]
 " =====================================
-Plugin 'bronson/vim-trailing-whitespace'
 map <leader><space> :FixWhitespace<cr>
 
 " 类似Sublime的多光标编辑
-Plugin 'terryma/vim-multiple-cursors'
 
 " =====================================
 "              Vim配置选项
@@ -296,7 +278,7 @@ set fileencoding=utf-8
 set fileencodings=ucs-bom,utf-8,gbk,cp936,latin-1
 
 "vim提示信息乱码的解决
-language messages zh_CN.utf-8
+" language messages zh_CN.utf-8
 "vim的菜单乱码解决：
 source $VIMRUNTIME/delmenu.vim
 source $VIMRUNTIME/menu.vim
@@ -357,7 +339,6 @@ nmap <leader>bq :bp <BAR> bd #<CR>
 " Show all open buffers and their status
 nmap <leader>bl :ls<CR>
 
-Plugin 'jlanzarotta/bufexplorer'
 " normal 模式下切换buffer
 if has("gui_running")
     nmap <A-1> <Plug>AirlineSelectTab1
