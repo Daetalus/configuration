@@ -37,6 +37,12 @@ Plug 'bronson/vim-trailing-whitespace'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'jlanzarotta/bufexplorer'
 call plug#end()
+
+" Adjust windows size faster
+nnoremap <silent> <leader>h :vertical resize -10<CR>
+nnoremap <silent> <leader>l :vertical resize +10<CR>
+nnoremap <silent> <leader>j :resize -5<CR>
+nnoremap <silent> <leader>k :resize +5<CR>
 " =====================================
 "         插件及其对应配置
 " =====================================
@@ -160,6 +166,7 @@ set laststatus=2
 let g:airline#extensions#whitespace#enabled = 1 "空白符检测
 let g:airline#extensions#tabline#enabled = 1 "顶部tab栏显示
 let g:airline#extensions#tabline#switch_buffers_and_tabs = 1
+let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline#extensions#tabline#show_buffers=2 "总是显示buffer
 let g:airline#extensions#tabline#show_tabs=0 "不显示tab
 let g:airline#extensions#tabline#show_tab_nr = 1
@@ -329,9 +336,46 @@ noremap <leader>9 9gt
 noremap <leader>0 :tablast<cr>
 
 " Move to the next buffer
-nmap <leader>l :bnext<CR>
+" nmap <leader>n :bnext<CR>
+function! NextRealBuffer()
+  let l:current = bufnr('%')
+  let l:count = bufnr('$')
+  let l:i = l:current
+
+  while 1
+    let l:i = (l:i % l:count) + 1
+    if buflisted(l:i) && getbufvar(l:i, '&buftype') == ''
+      execute 'buffer' l:i
+      return
+    endif
+    if l:i == l:current
+      return
+    endif
+  endwhile
+endfunction
+
+nnoremap <silent> <leader>n :call NextRealBuffer()<CR>
+
+function! PreviousRealBuffer()
+  let l:current = bufnr('%')
+  let l:i = l:current
+  let l:count = bufnr('$')
+
+  while 1
+    let l:i = (l:i - 2 + l:count) % l:count + 1
+    if buflisted(l:i) && getbufvar(l:i, '&buftype') == ''
+      execute 'buffer' l:i
+      return
+    endif
+    if l:i == l:current
+      return
+    endif
+  endwhile
+endfunction
+
 " Move to the previous buffer
-nmap <leader>h :bprevious<CR>
+nnoremap <silent> <Leader>p :call PreviousRealBuffer()<CR>
+
 
 " Close the current buffer and move to the previous one
 " This replicates the idea of closing a tab
