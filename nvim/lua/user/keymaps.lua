@@ -16,14 +16,3 @@ vim.keymap.set('v', '>', '>gv', { noremap = true, silent = true })
 
 -- 使用 <leader>s 快速保存文件
 vim.keymap.set('n', '<leader>s', ':update<CR>', { noremap = true, silent = true })
--- 切换到上一个 buffer
-vim.keymap.set("n", "<leader>h", "<cmd>BufferLineCyclePrev<CR>", { desc = "上一个 Buffer" })
-
--- 切换到下一个 buffer
-vim.keymap.set("n", "<leader>l", "<cmd>BufferLineCycleNext<CR>", { desc = "下一个 Buffer" })
-
-for i = 1, 9 do
-  vim.keymap.set("n", "<leader>" .. i, function()
-    require("bufferline").go_to_buffer(i, true)
-  end, { desc = "跳转到第 " .. i .. " 个 buffer" })
-end
